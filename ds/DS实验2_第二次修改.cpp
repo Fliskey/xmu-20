@@ -225,6 +225,24 @@ int IndexCheck(Linklist &H,int n){
 			Idx[ Index_number ].len++;
 		}
 	}
+	return 1;
+}
+
+int IndexFind(int k){
+	for(int i=0;i<Index_number;i++){
+		Linklist p = Idx[i].First;
+		int fdt = p->data;
+		int Il = Idx[i].len;
+		if(k <= fdt){
+			for(int j=1;j<=Il;j++){
+				if(k == p->data){
+					return i+1;
+				}
+				p = p->next;
+			}
+		} 
+	}
+	return 0;
 }
 
 int main(){
@@ -252,8 +270,10 @@ int main(){
 	PrintList(H);
 	
 	cout<<"正在建立索引表...请稍后"<<endl<<endl;
-	IndexCheck(H,n);
-	cout<<"索引表建立完毕！"<<endl<<endl;
+	if(IndexCheck(H,n)){
+		cout<<"索引表建立完毕！"<<endl<<endl;
+	}
+	
 	
 	cout<<"索引表页码：" ; 
 	
@@ -261,14 +281,23 @@ int main(){
 		cout<<Idx[i].ltd<<" ";
 	}
 	
-  //索引做好了，查找未完工
-  
+	cout<<endl;
+	
+//	索引和查找做好了，插入未完工
+//	Page	1	4	7	9	14	18
+//	data	3	6	8	13	17	20
+
 	cout<<"请输入待查找的数：";
 	int en;
 	cin>>en;
 	
-  
-	
+	int tt = IndexFind(en);
+	if(tt){
+		cout<<"找到数据！数据位于"<< tt<<"段"<<endl; 
+	}
+	else{
+		cout<<"未找到数据！"<<endl; 
+	}
 	
 	
 	
