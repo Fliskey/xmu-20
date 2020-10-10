@@ -157,7 +157,6 @@ struct Index{
 	Linklist First;
 	Linklist Last;
 	int ltd;
-//	int hdata = FindList(Head,1);
 	int len;
 }Idx[500];
 
@@ -250,7 +249,10 @@ int main(){
 	//测试样例：
 	//20
 	//3 2 1 6 5 4 8 7 13 12 11 10 9 17 16 15 14 20 19 18 
-	//10
+	
+	//测试样例的目录 
+	//	Page	1	4	7	9	14	18
+	//	data	3	6	8	13	17	20
 	
 	Linklist H;
 	InitList(H);
@@ -283,9 +285,8 @@ int main(){
 	
 	cout<<endl;
 	
-//	索引和查找做好了，插入未完工
-//	Page	1	4	7	9	14	18
-//	data	3	6	8	13	17	20
+	
+
 
 	cout<<"请输入待查找的数：";
 	int en;
@@ -298,45 +299,6 @@ int main(){
 	else{
 		cout<<"未找到数据！"<<endl; 
 	}
-	
-	
-	
-  //以下星号中间的内容是上次课写的，请直接忽略。
-	/*
-	
-  
-//	cout<<"请输入建立索引位置个数:" ;
-//	int x;
-//	cin>>x;
-	
-//	int nx = n/x;
-	
-	//建立索引
-  
-	for(int i=0;i<x;i++){
-		InitList(Idx[i].Head);
-		if(i != x-1) 
-			Idx[i].len = nx;
-		else
-			Idx[i].len = n%x + nx;
-		int w = i*nx+1;	
-		printf("%d ",w);
-		IndexInsert(H,Idx[i].Head,w);
-	}
-	printf("\n");
-	
-	//测试输出索引所指的内容 
-	printf("第一块内容：");PrintIndex(Idx[0]);
-	printf("第二块内容：");PrintIndex(Idx[1]);
-	printf("第三块内容：");PrintIndex(Idx[2]);
-  
-	//能做到稀疏索引表，暂时无法做到分级查找
-	//计划加入根据索引表hdata的值进行排序的功能 
-	//后续会去补上分级查找算法的内容 
-  
-	*/
-	
-	
 	
 	return 0;
 }
