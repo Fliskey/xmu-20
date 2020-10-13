@@ -13,35 +13,43 @@ int main(){
 		zs = a/b;
 		a %= b;
 		
-		ans[ll] = zs;
-	//	printf("ans[%ld]:%ld\n",ll,zs);
+		//整数部分单独存到ans[0]里 
+		ans[ll] = zs; 
+		
 		ll++;
 		
 		while(c != -1){
 			a *= 10;
 			zs = a/b;
 			ans[ll] = zs;
-		//	printf("ans[%ld]:%ld\n",ll,zs);
 			ll++;
 			a %= b;
 			c--;
 		}
 		
+		//四舍五入 
 		if(ans[ll-1]>5){
 			ans[ll-2]+=1;
 		}
 		
 		ULL zc = ll;
-	//	printf("zc:%ld\n",zc);
 		
-		ll--;
+		//判断是否进位 
+		ll -= 2;
 		while(ans[ll] == 10 && ll != 0){
+			
 			ans[ll] = 0;
 			ll--;
 			ans[ll]++;
+			
+		}
+		if(zc != 2){
+			printf("%ld.",ans[0]);
+		}
+		else{
+			printf("%ld",ans[0]);
 		}
 		
-		printf("%ld.",ans[0]);
 		for(ULL i=1;i<zc-1;i++){
 			printf("%ld",ans[i]);
 		}
