@@ -2,8 +2,6 @@
 #define ULL unsigned long long
 ULL ans[200];
 
-//399999 100000 4 ´ð°¸ÊÇ´íµÄ 
-
 int main(){
 	ULL a,b,zs;
 	int c;
