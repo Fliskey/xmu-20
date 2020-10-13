@@ -1,36 +1,26 @@
 #include <stdio.h>
 
-int a[30],b[30];
-char sa[30],sb[30];
-int ans[30];
+int a[600],b[600];
+char sa[600],sb[600];
+int ans[600];
 
 int jf(int *x,int *y,int xl,int yl,int *anss){
-	for(int i=0;i<=yl;i++){
-		printf("%d",ans[i]);
-	}
-	printf("\n");
 	
 	for(int i=0 ; i<xl ; i++){
 		anss[yl-i] += x[xl-i-1] + y[yl-i-1];
-		anss[yl-i-1] += anss[yl-i] % 10;
-		anss[yl-i] %= 10;
+		while(anss[yl-i] >= 10){
+			anss[yl-i-1]++;
+			anss[yl-i] -= 10;
+		}
 	}
-	
-	for(int i=0;i<=yl;i++){
-		printf("%d",ans[i]);
-	}
-	printf("\n");
 	
 	for(int i=0 ; i<yl-xl ; i++){
 		anss[yl-xl-i] += y[yl-xl-i-1];
-		anss[yl-xl-i-1] += anss[yl-xl-i] % 10;
-		anss[yl-xl-i] %= 10;
+		while(anss[yl-xl-i] >= 10){
+			anss[yl-xl-i-1]++;
+			anss[yl-xl-i] -= 10;
+		}
 	}
-	
-	for(int i=0;i<=yl;i++){
-		printf("%d",ans[i]);
-	}
-	printf("\n");
 	
 	return 0;
 }
@@ -43,6 +33,7 @@ int main(){
 		int la = 0;
 		int lb = 0;
 		int i;
+		
 		for(i=0 ; sa[i]!='\0' ; i++){
 			a[i] = sa[i] - '0';
 		}
@@ -55,16 +46,23 @@ int main(){
 		
 		if(lb > la){
 			jf(a,b,la,lb,ans);
-			for(int i=0;i<=lb;i++){
+			if(ans[0] == 1){
+				printf("1");
+			}
+			for(int i=1;i<=lb;i++){
 				printf("%d",ans[i]);
 			}
 		}
 		else{
 			jf(b,a,lb,la,ans);
-			for(int i=0;i<=la;i++){
+			if(ans[0] == 1){
+				printf("1");
+			}
+			for(int i=1;i<=la;i++){
 				printf("%d",ans[i]);
 			}
 		}
+		
 		printf("\n");
 	}
 	return 0;

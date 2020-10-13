@@ -6,10 +6,10 @@ int main(){
 //	printf("%f %f\n",r,h);
 	const double pi = 3.14;
 	double C1,Sa,Sb,Va,Vb;
-	C1 = 2 * pi * r;
-	Sa = pi * r * r;
-	Sb = 4 * pi * r * r;
-	Va = 4 * pi * r * r * r / 3;
+	C1 = 2 * pi * r + 0.0000001;
+	Sa = pi * r * r + 0.0000001;
+	Sb = 4 * pi * r * r + 0.0000001;
+	Va = 4 * pi * r * r * r / 3 + 0.0000001;
 	Vb = Sa * h;
 	printf("C1=%.2f\n",C1);
 	printf("Sa=%.2f\n",Sa);
