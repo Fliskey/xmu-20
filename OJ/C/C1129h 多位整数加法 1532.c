@@ -7,11 +7,29 @@ int ans[600];
 int jf(int *x,int *y,int xl,int yl,int *anss){
 	
 	for(int i=0 ; i<xl ; i++){
-		anss[yl-i] += x[xl-i-1] + y[yl-i-1];
+			
+		anss[yl-i] += x[xl-i-1] + y[yl-i-1]; 
+		
 		while(anss[yl-i] >= 10){
 			anss[yl-i-1]++;
 			anss[yl-i] -= 10;
 		}
+		
+		printf("i:%d\nx:",i);
+		for(int i=0;i<xl;i++){
+			printf("%d ",x[i]);
+		}
+		printf("\ny:");
+		for(int i=0;i<yl;i++){
+			printf("%d ",y[i]);
+		}
+		printf("\nans:");
+		for(int i=0;i<=yl;i++){
+			printf("%d ",ans[i]);
+		}
+		printf("\n\n");
+		
+		
 	}
 	
 	for(int i=0 ; i<yl-xl ; i++){
@@ -20,6 +38,21 @@ int jf(int *x,int *y,int xl,int yl,int *anss){
 			anss[yl-xl-i-1]++;
 			anss[yl-xl-i] -= 10;
 		}
+		
+		printf("i:%d\nx:",i);
+		for(int i=0;i<xl;i++){
+			printf("%d ",x[i]);
+		}
+		printf("\ny:");
+		for(int i=0;i<yl;i++){
+			printf("%d ",y[i]);
+		}
+		printf("\nans:");
+		for(int i=0;i<=yl;i++){
+			printf("%d ",ans[i]);
+		}
+		printf("\n\n");
+		
 	}
 	
 	return 0;
