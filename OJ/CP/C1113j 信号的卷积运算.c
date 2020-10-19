@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <assert.h>
+#include <string.h>
 //C1113j 信号的卷积运算
 
 int m[104],n[104];
@@ -27,8 +29,7 @@ int main(){
 		{
 			int nx;
 			nx = i-j;
-			if(nx <= nl)
-			{
+			if(nx >= 0){
 				sum += m[j] * n[nx];
 			}
 		}

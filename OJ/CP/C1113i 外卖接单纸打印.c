@@ -2,8 +2,6 @@
 //C1113i 外卖接单纸打印
 
 int main(){
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
 	
 	printf("        #1 MT Takeaway\n\n");
 	
