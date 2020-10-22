@@ -1,0 +1,12 @@
+<book xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="book.xsd">
+	<title>Data On the Web</title>
+	<author>Fliskey</author>
+	<section>
+		<title>1.aaaa</title>
+		<p>2333</p>
+		<section>
+			<title>1-1.bbbb</title>
+			<p>6666</p>
+		</section>
+	</section>
+</book>
