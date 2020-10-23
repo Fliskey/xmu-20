@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="titleType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="bookTitleType">
+		<xs:restriction base="titleType">
+			<xs:enumeration value="Data On the Web"/>
+			<xs:enumeration value="TCP/IP Illustrated"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sectionTitleType">
+		<xs:restriction base="titleType">
+			<xs:pattern value="\d(-\d)*.[a-z]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="figureTitleType">
+		<xs:restriction base="titleType">
+			<xs:pattern value="\d(-\d)+.[a-z]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="sectionType">
+		<xs:sequence>
+			<xs:element name="title" type="sectionTitleType"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="p"/>
+				<xs:element name="figure">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="title" type="figureTitleType"/>
+							<xs:element name="image">
+								<xs:complexType>
+									<xs:attribute name="source" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="width" use="required"/>
+						<xs:attribute name="height" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="section" type="sectionType"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="id"/>
+		<xs:attribute name="difficulty"/>
+	</xs:complexType>
+	<xs:element name="book">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="title" type="bookTitleType"/>
+				<xs:element name="author" minOccurs="1" maxOccurs="3">
+					<xs:unique name="authorkey">
+						<xs:selector xpath="author"/>
+						<xs:field xpath="author"/>
+					</xs:unique>
+				</xs:element>
+				<xs:element name="section" type="sectionType" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
