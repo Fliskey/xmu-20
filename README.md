@@ -5,10 +5,10 @@ asm：汇编语言
 ds：数据结构与算法
 
 oj：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 上我敲的代码
-- 过评判的代码一般放在newAC中
-- 竞赛代码放在Competition中
-- UNAC是交了但没过的代码
-- Coding是写了一半半的代码
+- 过评判的代码一般放在[newAC](https://github.com/Fliskey/xmu/tree/master/OJ/newAC)中
+- 竞赛代码放在[Competition](https://github.com/Fliskey/xmu/tree/master/OJ/Competition)中
+- [UNAC](https://github.com/Fliskey/xmu/tree/master/OJ/UNAC)是交了但没过的代码
+- [Coding](https://github.com/Fliskey/xmu/tree/master/OJ/Coding)是写了一半半的代码
 
 XML：XML课程仿写的代码
 
