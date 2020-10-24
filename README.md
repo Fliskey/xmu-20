@@ -4,7 +4,7 @@ asm：汇编语言
 
 ds：数据结构与算法
 
-oj：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 我敲的代码
+oj：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 上我敲的代码
 
 XML：XML课程仿写的代码
 
