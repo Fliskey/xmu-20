@@ -15,61 +15,28 @@ int dcmp(const void* _a,const void* _b){
 	return *a - *b;
 }
 
-int main(){
-	int n;
-	int num[10004];
+int num[200004];
+char name[200004][31];
 
+int main(){
+	freopen("test9.in","r",stdin); 
+	freopen("out.txt","w",stdout);
+	int n;
 	scanf("%d",&n);
-	if(n > 1000){
-		char namel[10004][104];
-		for(int i=0 ; i<n ; i++){
-			scanf("%s",namel[i]);
-		}
-		
-		for(int i=0 ; i<n ; i++){
-			scanf("%d",&num[i]);
-		}
-		
-		qsort(num,n,sizeof(num[0]),dcmp);
-		qsort(namel,n,sizeof(namel[0]),scmp);
-		
-		for(int i=0 ; i<n ; i++){
-			printf("%s %d\n",namel[i],num[i]);
-		}
+	
+	for(int i=0 ; i<n ; i++){
+		scanf("%s",name[i]);
 	}
-	else if(n > 100){
-		char namem[1004][1004];
-		for(int i=0 ; i<n ; i++){
-			scanf("%s",namem[i]);
-		}
-		
-		for(int i=0 ; i<n ; i++){
-			scanf("%d",&num[i]);
-		}
-		
-		qsort(num,n,sizeof(num[0]),dcmp);
-		qsort(namem,n,sizeof(namem[0]),scmp);
-		
-		for(int i=0 ; i<n ; i++){
-			printf("%s %d\n",namem[i],num[i]);
-		}
+	
+	for(int i=0 ; i<n ; i++){
+		scanf("%d",&num[i]);
 	}
-	else{
-		char names[104][10004];
-		for(int i=0 ; i<n ; i++){
-			scanf("%s",names[i]);
-		}
-		
-		for(int i=0 ; i<n ; i++){
-			scanf("%d",&num[i]);
-		}
-		
-		qsort(num,n,sizeof(num[0]),dcmp);
-		qsort(names,n,sizeof(names[0]),scmp);
-		
-		for(int i=0 ; i<n ; i++){
-			printf("%s %d\n",names[i],num[i]);
-		}
+	
+	qsort(num,n,sizeof(num[0]),dcmp);
+	qsort(name,n,sizeof(name[0]),scmp);
+	
+	for(int i=0 ; i<n ; i++){
+		printf("%s %d\n",name[i],num[i]);
 	}
 	
 	return 0;
