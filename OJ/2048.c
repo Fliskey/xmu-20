@@ -14,7 +14,7 @@
 
 int qp[6][6];//全局变量，共用的棋盘 
 
-//函数声明，都挺好理解的我就不一一写注释了 
+//函数声明
 int Init_qp();
 int Print_qp();
 int Creat_qz();
@@ -25,12 +25,15 @@ int move(int);
 
 //主函数 
 int main(){
-	srand((int)time(NULL));
+	srand((int)time(NULL)); 
 	Init_qp();
 	Print_qp();
-	Creat_qz();
-	Print_qp();
-	while(put_in());
+	for(int i=1;i<=18;i++){
+		Creat_qz();
+		Print_qp();
+	} 
+	
+//	while(put_in());
 	
 	return 0;
 }
@@ -212,19 +215,32 @@ int Creat_qz(){
 		int t=rand()%16;
 		int i = t/4 +1;
 		int j = t%4 +1;
-		if(!tried[i][j] && !qp[i][j]){
+		
+		if(remain == 0){
+			printf("CAN'T PUT!\n");
+			return 0;
+		}
+		
+		if(tried[i][j]){
+			continue;
+		}
+		else if(qp[i][j]){
+			if(!tried[i][j]){
+				tried[i][j] = 1;
+				remain--;
+			}
+			continue;
+		}
+		else if(!qp[i][j]){
 			int value = 2*(rand()%2+1);
 			qp[i][j] = value;
 			return 1;
 		}
 		else{
-			tried[i][j] = 1;
-			remain--;
+			printf("ERROR!\n");
 		}
 		
-		if(remain == 0){
-			return 0;
-		}
+		
 	}
 	
 }
