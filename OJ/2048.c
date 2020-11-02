@@ -1,20 +1,24 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <conio.h>
 #include <time.h>
 
+//å®šä¹‰æ–¹å‘é”®
 #define UP 1
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
 
-//¶¨Òå·µ»ØÖµ£¨±£Ö¤²»ÖØ¸´¼´¿É£© 
+//å®šä¹‰è¿”å›å€¼ï¼ˆä¿è¯ä¸é‡å¤å³å¯ï¼‰ 
 #define CANTMOVE 73205
 #define FAILED 41421
 #define MOVED 22141
 
 
-int qp[6][6];//È«¾Ö±äÁ¿£¬¹²ÓÃµÄÆåÅÌ 
+int qp[6][6];//å…¨å±€å˜é‡ï¼Œå…±ç”¨çš„æ£‹ç›˜ 
 
-//º¯ÊıÉùÃ÷
+//å‡½æ•°å£°æ˜
 int Init_qp();
 int Print_qp();
 int Creat_qz();
@@ -23,7 +27,7 @@ int put_in();
 int can_move(int);
 int move(int);
 
-//Ö÷º¯Êı 
+//ä¸»å‡½æ•°
 int main(){
 	srand((int)time(NULL)); 
 	Init_qp();
@@ -39,12 +43,12 @@ int main(){
 }
 
 
-//---------------- ÏÂÃæÊÇ¸÷¸öº¯Êı ----------------  
+//---------------- ä¸‹é¢æ˜¯å„ä¸ªå‡½æ•° ----------------  
 
 
 int move(int fx){
+	int moved = 0;
 	switch(fx){
-		int moved = 0;
 		case UP:{
 			for(int j=1;j<=4;j++)
 			{
@@ -90,7 +94,7 @@ int move(int fx){
 					}
 					moved = 1;
 					for(int l=4;l>=4-k;l++){
-					//	qp[l][j] = qp[];--------------------------------(Ğ´µ½ÕâÀï )
+					//	qp[l][j] = qp[];--------------------------------(å†™åˆ°è¿™)
 					}
 				}
 				for(int i=4;i<=2;i--)
@@ -159,7 +163,7 @@ int move(int fx){
 int put_in(){
 	char c = getch();
 	switch(c){
-		//-32 ·½Ïò·û
+		//-32 æ–¹å‘ç¬¦
 		case -32:{
 			c = getch();
 			int fx = 0;
