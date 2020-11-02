@@ -31,8 +31,7 @@ int main(){
 }
 
 
-
-//-------- function realize --------
+//-------- realize function --------
 
 int SetRandom(){
 	int puted = 0;
@@ -86,6 +85,12 @@ int InitBoard(){
     return 1;
 }
 
-int PrintBoard(){
-
+int Print_qp(){
+	for(int i=1;i<=4;i++){
+		for(int j=1;j<=4;j++){
+			printf("%-4d",board[i][j]);
+		} 
+		printf("\n");
+	}
+	printf("\n");
 }
