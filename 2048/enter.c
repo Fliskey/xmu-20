@@ -1,7 +1,6 @@
 //-------- 2048GAME --------
 //0474-Fliskey
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -23,6 +22,7 @@ int board[6][6];
 int InitBoard();
 int SetRandom();
 int ClearBoard();
+int PrintBoard();
 
 //main function
 int main(){
@@ -84,4 +84,8 @@ int InitBoard(){
     SetRandom();
     SetRandom();
     return 1;
+}
+
+int PrintBoard(){
+
 }
