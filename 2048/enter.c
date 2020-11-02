@@ -24,14 +24,26 @@ int SetRandom();
 int ClearBoard();
 int PrintBoard();
 
+int test();
+
 //main function
 int main(){
-    
+    test();
     return 0;
 }
 
 
 //-------- realize function --------
+
+int test(){
+	srand((int)time(NULL)); 
+	InitBoard();
+	PrintBoard();
+	for(int i=1;i<=18;i++){
+		SetRandom();
+		PrintBoard();
+	} 
+}
 
 int SetRandom(){
 	int puted = 0;
