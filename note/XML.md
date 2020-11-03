@@ -49,7 +49,7 @@ XML DTD Schema
 </root>
 ```
 
-##### elementFormDefault与attributeFormDefault
+##### `elementFormDefault`与`attributeFormDefault`
 
 ##### 例子
 
@@ -192,11 +192,11 @@ $S[i]：访问序列中的第i项
 | 在操作系统中                                                 | 在  XPath  中                                                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | /   表示根目录；                                             | /   表示文档节点；  /library 表示根元素；                    |
-| 绝对路径表示形式 <br />/users/dir/foo  表示 users  目录下  dir 目录中的 foo  文件，只能有一个。 | /library/book/chapter/section 表示 library 元素下的 book  元素下的  chapter  元素下的所有  section，可以有多个。 |
+| 绝对路径表示形式 <br />`/users/dir/foo`  表示 users  目录下  dir 目录中的 foo  文件，只能有一个。 | `/library/book/chapter/section `表示 library 元素下的 book  元素下的  chapter  元素下的所有  section，可以有多个。 |
 | 相对路径表示形式<br />  foo 表示当前目录下的 foo  文件，只能有一个 | section 表示当前元素的所有 section  子元素，可以有多个。     |
 | .  表示当前目录。                                            | .  表示当前元素。                                            |
 | .. 表示父目录。                                              | .. 表示父元素。                                              |
-| /users/dave/\* 表示 /users/dave 目录中的所有文件。           | /library/book/chapter/\* 表示: <br /><u>/library/book/chapter</u> 下的所有元素。<br /><br />//表示当前节点下的所有元素；<br /> //section 表示当前文档中的所有 section  元素。 |
+| `/users/dave/* `表示 `/users/dave` 目录中的所有文件。        | `/library/book/chapter/* `表示: <br />`/library/book/chapter `下的所有元素。<br /><br />//表示当前节点下的所有元素；<br /> //section 表示当前文档中的所有 section  元素。 |
 
 #### 完整语法形式
 
@@ -220,9 +220,84 @@ AbsoluteLocationPath ::= '/’ RelativeLocationPath? | AbbrevAbsoluteLocationPat
 
 ##### Step
 
-- 轴标识符（AxisSpecifier）
-  - 相对当前节点查找的方向
-  - 关系轴标识符**（上到这）**
-- 节点测试（NodeTest）
+- 轴标识符（`AxisSpecifier`）
+  - 表示相对当前节点<u>**查找的方向**</u>
+
+  - 关系轴标识符
+
+  - 13种
+
+    1. ancestor，从当前点到文档点的所有点
+
+    2. ancestor-or-self，加上自己
+
+    3. attribute，属性
+
+    4. child，子节点
+
+    5. descendant，子孙节点
+
+    6. descendant-or-self，加上自己
+
+    7. following，先根顺序的后继结点
+       - 开始标记和结束标记都在当前节点结束标记之后的节点
+    8. following-sibling，当前节点之后的后继节点中的第一个节点
+
+    9. namespace，找当前节点所属的命名空间
+
+    10. parent，查找父节点
+
+    11. preceding，前驱节点
+    12. preceding-sibling，先于它遍历的最后一个节点
+    13. self，自己
+
+  - 缩写
+
+    | 缩写形式 | 完整表示形式（整个替换，类宏定义）               |
+    | -------- | ------------------------------------------------ |
+    | （无）   | child::                                          |
+    | @        | attribute::                                      |
+    | .        | self::node()                                     |
+    | .//X     | self::node()/descendant-or-self::node()/child::X |
+    | ..       | parent::node()                                   |
+    | ../X     | parent::node()/child::X                          |
+    | //       | /descendant-or-self::node()/                     |
+    | //X      | /descendant-or-self::node()/child::X             |
+
+    `例如： /library/book 等价于 /child::library/child::book`
+
+  - 例子
+
+    ```xml
+    <library>
+        <book>
+            <chapter/>
+            <chapter>
+                <section>
+                    <paragraph/>
+                    <paragraph/>
+                </section>
+            </chapter>
+            <chapter/>
+        </book>
+        <book/>
+    </library>
+    
+    
+    //chapter[2]/self::*			->4/9
+    //chapter[2]/preceding::*		->3
+    //chapter[2]/following::*		->10/12
+    //chapter[2]/ancestor::*		->1/2/11/13
+    //chapter[2]/descendant::*		->5/6/7/8
+    ```
+
+    
+
+    
+
+- 节点测试（`NodeTest`）
+  - 给出节点名称指出要查找**<u>哪些节点</u>**（名称或类型）
   - 名字测试/类型测试
-- 判定谓词（Predicate）
+- 判定谓词（`Predicate`）
+  - 对所查找到的节点按照指定方式进行筛选，给定<u>**筛选方式**</u>
+
