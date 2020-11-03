@@ -218,9 +218,9 @@ RelativeLocationPath ::= Step | RelativeLocationPath '/' Step | AbbrevRelativeLo
 AbsoluteLocationPath ::= '/’ RelativeLocationPath? | AbbrevAbsoluteLocationPath (3) 
 ```
 
-##### Step
+#### Step
 
-###### 轴标识符
+##### 轴标识符
 
 （`AxisSpecifier`）
 
@@ -293,18 +293,17 @@ AbsoluteLocationPath ::= '/’ RelativeLocationPath? | AbbrevAbsoluteLocationPat
   //chapter[2]/descendant::*		->5/6/7/8
   ```
 
-###### 节点测试
+##### 节点测试
 
 （`NodeTest`）
 
 - 给出节点名称指出要查找**<u>哪些节点</u>**（名称或类型）
 - 名字测试/类型测试
 
-###### 判定谓词
+##### 判定谓词
 
 （`Predicate`）
 
 - 对所查找到的节点按照指定方式进行筛选，给定<u>**筛选方式**</u>
 - 用[...]表示
-- 
 
