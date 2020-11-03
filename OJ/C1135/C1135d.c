@@ -8,19 +8,20 @@ int ans[600];
 
 int jf(int *x,int *y,int xl,int yl,int *anss){
 	
-	for(int i=0 ; i<xl ; i++){
-		anss[xl-i] += x[xl-i-1] - y[yl-i-1]; 
-		while(anss[yl-i] < 0){
+	for(int i=0 ; i<yl ; i++){
+	//	printf("%d %d %d\n",xl-i,xl-i-1,yl-i-1);
+		anss[xl-i+1] += x[xl-i-1] - y[yl-i-1]; 
+		while(anss[xl-i+1] < 0){
 			anss[xl-i]--;
 			anss[xl-i+1] += 10;
 		}
 	}
 	
-	for(int i=0 ; i<yl-xl ; i++){
-		anss[xl-yl-i] += y[xl-yl-i-1];
-		while(anss[xl-xl-i] < 0){
-			anss[xl-xl-i]--;
-			anss[xl-xl-i+1] += 10;
+	for(int i=0 ; i<xl-yl ; i++){
+		anss[xl-yl-i+1] += x[xl-yl-i-1];
+		while(anss[xl-yl-i+1] < 0){
+			anss[xl-yl-i]--;
+			anss[xl-yl-i+1] += 10;
 		}
 	}
 	
@@ -77,7 +78,7 @@ int main(){
 			while(ans[i] == 0){
 				i++;
 			}
-			for(;i<=la;i++){
+			for(;i<=la+1;i++){
 				printf("%d",ans[i]);
 			}
 		}
@@ -88,7 +89,7 @@ int main(){
 			while(ans[i] == 0){
 				i++;
 			}
-			for(;i<=lb;i++){
+			for(;i<=lb+1;i++){
 				printf("%d",ans[i]);
 			}
 		}
