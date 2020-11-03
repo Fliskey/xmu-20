@@ -7,6 +7,9 @@ int b[30];
 int n,k;
 
 int ss(int x){
+	if(x == 0 || x == 1){
+		return 1;
+	}
 	int q = (int) sqrt(x);
 	for(int i=2;i<=q;i++){
 		if(x%i == 0){
@@ -33,7 +36,6 @@ int mj(int nw,int ni){
 		else{
 			return 0;
 		}
-		
 	}
 	else{
 		int sumk = 0;
