@@ -220,84 +220,91 @@ AbsoluteLocationPath ::= '/’ RelativeLocationPath? | AbbrevAbsoluteLocationPat
 
 ##### Step
 
-- 轴标识符（`AxisSpecifier`）
-  - 表示相对当前节点<u>**查找的方向**</u>
+###### 轴标识符
 
-  - 关系轴标识符
+（`AxisSpecifier`）
 
-  - 13种
+- 表示相对当前节点<u>**查找的方向**</u>
 
-    1. ancestor，从当前点到文档点的所有点
+- 13种轴标识符
 
-    2. ancestor-or-self，加上自己
+  1. ancestor，从当前点到文档点的所有点
 
-    3. attribute，属性
+  2. ancestor-or-self，加上自己
 
-    4. child，子节点
+  3. attribute，属性
 
-    5. descendant，子孙节点
+  4. child，子节点
 
-    6. descendant-or-self，加上自己
+  5. descendant，子孙节点
 
-    7. following，先根顺序的后继结点
-       - 开始标记和结束标记都在当前节点结束标记之后的节点
-    8. following-sibling，当前节点之后的后继节点中的第一个节点
+  6. descendant-or-self，加上自己
 
-    9. namespace，找当前节点所属的命名空间
+  7. following，先根顺序的后继结点
+     - 开始标记和结束标记都在当前节点结束标记之后的节点
+  8. following-sibling，当前节点之后的后继节点中的第一个节点
 
-    10. parent，查找父节点
+  9. namespace，找当前节点所属的命名空间
 
-    11. preceding，前驱节点
-    12. preceding-sibling，先于它遍历的最后一个节点
-    13. self，自己
+  10. parent，查找父节点
 
-  - 缩写
+  11. preceding，前驱节点
+  12. preceding-sibling，先于它遍历的最后一个节点
+  13. self，自己
 
-    | 缩写形式 | 完整表示形式（整个替换，类宏定义）               |
-    | -------- | ------------------------------------------------ |
-    | （无）   | child::                                          |
-    | @        | attribute::                                      |
-    | .        | self::node()                                     |
-    | .//X     | self::node()/descendant-or-self::node()/child::X |
-    | ..       | parent::node()                                   |
-    | ../X     | parent::node()/child::X                          |
-    | //       | /descendant-or-self::node()/                     |
-    | //X      | /descendant-or-self::node()/child::X             |
+- 缩写
 
-    `例如： /library/book 等价于 /child::library/child::book`
+  | 缩写形式 | 完整表示形式（整个替换，类宏定义）               |
+  | -------- | ------------------------------------------------ |
+  | （无）   | child::                                          |
+  | @        | attribute::                                      |
+  | .        | self::node()                                     |
+  | .//X     | self::node()/descendant-or-self::node()/child::X |
+  | ..       | parent::node()                                   |
+  | ../X     | parent::node()/child::X                          |
+  | //       | /descendant-or-self::node()/                     |
+  | //X      | /descendant-or-self::node()/child::X             |
 
-  - 例子
+  `例如： /library/book 等价于 /child::library/child::book`
 
-    ```xml
-    <library>
-        <book>
-            <chapter/>
-            <chapter>
-                <section>
-                    <paragraph/>
-                    <paragraph/>
-                </section>
-            </chapter>
-            <chapter/>
-        </book>
-        <book/>
-    </library>
-    
-    
-    //chapter[2]/self::*			->4/9
-    //chapter[2]/preceding::*		->3
-    //chapter[2]/following::*		->10/12
-    //chapter[2]/ancestor::*		->1/2/11/13
-    //chapter[2]/descendant::*		->5/6/7/8
-    ```
+- 例子
 
-    
+  ```xml
+  <library>
+      <book>
+          <chapter/>
+          <chapter>
+              <section>
+                  <paragraph/>
+                  <paragraph/>
+              </section>
+          </chapter>
+          <chapter/>
+      </book>
+      <book/>
+  </library>
+  ```
 
-    
+  ```xquery
+  //chapter[2]/self::*			->4/9
+  //chapter[2]/preceding::*		->3
+  //chapter[2]/following::*		->10/12
+  //chapter[2]/ancestor::*		->1/2/11/13
+  //chapter[2]/descendant::*		->5/6/7/8
+  ```
 
-- 节点测试（`NodeTest`）
-  - 给出节点名称指出要查找**<u>哪些节点</u>**（名称或类型）
-  - 名字测试/类型测试
-- 判定谓词（`Predicate`）
-  - 对所查找到的节点按照指定方式进行筛选，给定<u>**筛选方式**</u>
+###### 节点测试
+
+（`NodeTest`）
+
+- 给出节点名称指出要查找**<u>哪些节点</u>**（名称或类型）
+- 名字测试/类型测试
+
+###### 判定谓词
+
+（`Predicate`）
+
+- 对所查找到的节点按照指定方式进行筛选，给定<u>**筛选方式**</u>
+- 用[...]表示
+- 
 
