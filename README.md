@@ -1,13 +1,22 @@
 ## 路过取代码的朋友挥动小手点个Star⭐呗~
 
+
+
+## 目录说明
+
 asm：汇编语言
 
 ds：数据结构与算法
 
-oj：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 上我敲的代码
-- 过评判的代码一般放在[newAC](https://github.com/Fliskey/xmu/tree/master/OJ/newAC)中
-- 竞赛代码放在[Competition](https://github.com/Fliskey/xmu/tree/master/OJ/Competition)中
-- [UNAC](https://github.com/Fliskey/xmu/tree/master/OJ/UNAC)是交了但没过的代码
+OJ：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 上我敲的代码
+- 过评判的代码一般放在[NormalAC](https://github.com/Fliskey/xmu/tree/master/OJ/NormalAC)中，前缀为该题分值
+- 竞赛代码放在以 **“C”** 开头文件夹中
+  - 文件名后缀说明
+  - **0：** 还没开始写的
+  - **coding：** 正在写的
+  - **WA/TLE...：** 交上去报错的类型
+  - 无后缀：已经通过的
+- [ERROR](https://github.com/Fliskey/xmu/tree/master/OJ/ERROR)是交了但没过的代码
 - [Coding](https://github.com/Fliskey/xmu/tree/master/OJ/Coding)是写了一半半的代码
 
 XML：XML课程仿写的代码
