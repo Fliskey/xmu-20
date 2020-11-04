@@ -10,7 +10,7 @@ ds：数据结构与算法
 
 OJ：C语言课程使用的[Online Judgment](http://oj.spimag.com:20101/OJ/ ) 上我敲的代码
 - 过评判的代码一般放在[NormalAC](https://github.com/Fliskey/xmu/tree/master/OJ/NormalAC)中，前缀为该题分值
-- 竞赛代码放在以 **“C”** 开头文件夹中
+- 竞赛代码放在[ OJ ](https://github.com/Fliskey/xmu/tree/master/OJ)目录下以 **“C”** 开头文件夹中
   - 文件名后缀说明
   - **0：** 还没开始写的
   - **coding：** 正在写的
