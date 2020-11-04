@@ -245,39 +245,39 @@ int IndexFind(int k){
 }
 
 int main(){
-	
-	//æµ‹è¯•æ ·ä¾‹ï¼š
+	freopen("Indexin.txt","r",stdin); 
+	//²âÊÔÑùÀı£º
 	//20
 	//3 2 1 6 5 4 8 7 13 12 11 10 9 17 16 15 14 20 19 18 
 	
-	//æµ‹è¯•æ ·ä¾‹çš„ç›®å½• 
+	//²âÊÔÑùÀıµÄÄ¿Â¼ 
 	//	Page	1	4	7	9	14	18
 	//	data	3	6	8	13	17	20
 	
 	Linklist H;
 	InitList(H);
 	
-	cout<<"è¯·è¾“å…¥æ•°æ®ä¸ªæ•°ï¼š"; 
+	cout<<"ÇëÊäÈëÊı¾İ¸öÊı£º"; 
 	int n;
 	cin>>n;
 	
-	cout<<"è¯·è¾“å…¥æ•°æ®ï¼š"; 
+	cout<<"ÇëÊäÈëÊı¾İ£º"; 
 	for(int i=1; i<=n; i++){
 		int a;
 		cin>>a;
 		TailInsert(H,a);
 	}
 	
-	cout<<"å½“å‰æ•°æ®ï¼š"; 
+	cout<<"µ±Ç°Êı¾İ£º"; 
 	PrintList(H);
 	
-	cout<<"æ­£åœ¨å»ºç«‹ç´¢å¼•è¡¨...è¯·ç¨å"<<endl<<endl;
+	cout<<"ÕıÔÚ½¨Á¢Ë÷Òı±í...ÇëÉÔºó"<<endl<<endl;
 	if(IndexCheck(H,n)){
-		cout<<"ç´¢å¼•è¡¨å»ºç«‹å®Œæ¯•ï¼"<<endl<<endl;
+		cout<<"Ë÷Òı±í½¨Á¢Íê±Ï£¡"<<endl<<endl;
 	}
 	
 	
-	cout<<"ç´¢å¼•è¡¨é¡µç ï¼š" ; 
+	cout<<"Ë÷Òı±íÒ³Âë£º" ; 
 	
 	for(int i=0;i<=Index_number;i++){
 		cout<<Idx[i].ltd<<" ";
@@ -288,16 +288,16 @@ int main(){
 	
 
 
-	cout<<"è¯·è¾“å…¥å¾…æŸ¥æ‰¾çš„æ•°ï¼š";
+	cout<<"ÇëÊäÈë´ı²éÕÒµÄÊı£º";
 	int en;
 	cin>>en;
 	
 	int tt = IndexFind(en);
 	if(tt){
-		cout<<"æ‰¾åˆ°æ•°æ®ï¼æ•°æ®ä½äº"<< tt<<"æ®µ"<<endl; 
+		cout<<"ÕÒµ½Êı¾İ£¡Êı¾İÎ»ÓÚ"<< tt<<"¶Î"<<endl; 
 	}
 	else{
-		cout<<"æœªæ‰¾åˆ°æ•°æ®ï¼"<<endl; 
+		cout<<"Î´ÕÒµ½Êı¾İ£¡"<<endl; 
 	}
 	
 	return 0;

@@ -46,6 +46,7 @@ int TCk = 0;
 
 //---------------- Ö÷º¯Êý ---------------- 
 int main(){
+	freopen("BiTreein.txt","r",stdin);
 	BiTree root;
 	TreeInit(root);
 	
