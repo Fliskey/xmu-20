@@ -1,0 +1,11 @@
+1.	//section[count(ancestor::section)=0]
+	//section[empty(ancestor::section)]
+
+2.	//section[count(ancestor::section)=0][count(child::section)=1]
+	//section[empty(ancestor::section)][following::section[empty(following-sibling::section)]]
+
+3.	//section[empty(child::section)][count(ancestor::section)>0]
+	//section[empty(child::section)][not (empty(ancestor::section))]
+
+4.	//section[contains(title,"Web")]/figure/image/@source
+	//figure[ancestor::section[contains(title,"Web")]]/image/@source
