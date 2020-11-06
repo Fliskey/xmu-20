@@ -7,11 +7,12 @@
 #include <time.h>
 #include <string.h>
 
-//define const : direction
-#define UP 1
-#define DOWN 2
-#define LEFT 3
-#define RIGHT 4
+//define const
+//%=2 direction
+#define UP 12
+#define DOWN 22
+#define LEFT 32
+#define RIGHT 42
 
 
 //global variable
@@ -23,8 +24,12 @@ int InitBoard();
 int SetRandom();
 int ClearBoard();
 int PrintBoard();
+int Failed();
+int GetInput();
+int Move(int);
 
 int test();
+int testboard1();
 
 //main function
 int main(){
@@ -39,10 +44,26 @@ int test(){
 	srand((int)time(NULL)); 
 	InitBoard();
 	PrintBoard();
-	for(int i=1;i<=18;i++){
+	
+	while(1){
+		int der = GetInput();
+		Move(der);
+		Merge(der);
+		Move(der);
 		SetRandom();
 		PrintBoard();
-	} 
+	}
+	
+	
+	
+}
+
+int testboard1(){
+	ClearBoard();
+	board[1][1] = 8;
+	board[2][1] = 4;
+	board[3][1] = 4;
+	board[4][1] = 4;
 }
 
 int SetRandom(){
@@ -86,7 +107,12 @@ int SetRandom(){
 }
 
 int ClearBoard(){
-    memset(board,0,sizeof(board));
+    memset(board,-1,sizeof(board));
+	for(int i=1;i<=4;i++){
+		for(int j=1;j<=4;j++){
+			board[i][j] = 0;
+		}
+	}
     return 1;
 }
 
@@ -98,6 +124,7 @@ int InitBoard(){
 }
 
 int PrintBoard(){
+	system("cls");
 	for(int i=1;i<=4;i++){
 		for(int j=1;j<=4;j++){
 			printf("%-4d",board[i][j]);
@@ -105,4 +132,183 @@ int PrintBoard(){
 		printf("\n");
 	}
 	printf("\n");
+}
+
+int Merge(int direction){
+	int if_merged = 0;
+	for(int i=1;i<=4;i++){
+		int value = 0;
+		int locate = 0;
+		for(int j=1;j<=4;j++){
+			switch(direction){
+				case UP:{
+					int row = j;
+					int clo = i;
+					if(board[row][clo]){
+						if(value == board[row][clo]){
+							value *= 2;
+							board[locate][clo] = value;
+							board[row][clo] = 0;
+							value = 0;
+							locate = 0;
+						}
+						else{
+							value = board[row][clo];
+							locate = row;
+						}
+					}
+					break;
+				}
+				case DOWN:{
+					int row = 4-j+1;
+					int clo = i;
+					if(board[row][clo]){
+						if(value == board[row][clo]){
+							value *= 2;
+							board[locate][clo] = value;
+							board[row][clo] = 0;
+							value = 0;
+							locate = 0;
+						}
+						else{
+							value = board[row][clo];
+							locate = row;
+						}
+					}
+					break;
+				}
+				case LEFT:{
+					int row = i;
+					int clo = j;
+					if(board[row][clo]){
+						if(value == board[row][clo]){
+							value *= 2;
+							board[row][locate] = value;
+							board[row][clo] = 0;
+							value = 0;
+							locate = 0;
+						}
+						else{
+							value = board[row][clo];
+							locate = clo;
+						}
+					}
+					break;
+				}
+				case RIGHT:{
+					int row = i;
+					int clo = 4-j+1;
+					if(board[row][clo]){
+						if(value == board[row][clo]){
+							value *= 2;
+							board[row][locate] = value;
+							board[row][clo] = 0;
+							value = 0;
+							locate = 0;
+						}
+						else{
+							value = board[row][clo];
+							locate = clo;
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+}
+
+int Move(int direction){
+	int if_moved = 0;
+	for(int i=1;i<=4;i++){
+		for(int j=1;j<=4;j++){
+			switch(direction){
+				//UP or DOWN:loop by cloumns
+				case UP:{
+					int row = j;
+					int clo = i;
+					while(board[row][clo] == 0 && row<=4){
+						row++;
+					}
+					if(row !=5 && j != row){
+						board[j][i] = board[row][clo];
+						board[row][clo] = 0;
+					}
+					break;
+				}
+				case DOWN:{
+					int row = 4-j+1;
+					int clo = i;
+					while(board[row][clo] == 0 && row > 0){
+						row--;
+					}
+					if(row != 0 &&(4-j+1) != row){
+						board[4-j+1][i] = board[row][clo];
+						board[row][clo] = 0;
+					}
+					break;
+				}
+				
+				//LEFT or RIGHT:loop by rows
+				case LEFT:{
+					int row = i;
+					int clo = j;
+					while(board[row][clo] == 0 && clo<=4){
+						clo++;
+					}
+					if(clo != 5 && j != clo){
+						board[i][j] = board[row][clo];
+						board[row][clo] = 0;
+					}
+					break;
+				}
+				case RIGHT:{
+					int row = i;
+					int clo = 4-j+1;
+					while(board[row][clo] == 0 && clo>0){
+						clo--;
+					}
+					if(clo != 0 && (4-j+1) != clo){
+						board[i][4-j+1] = board[row][clo];
+						board[row][clo] = 0;
+					}
+					break;
+				}
+			}
+		}
+	}
+}
+
+int GetInput(){
+	char c = getch();
+	switch(c){
+		//-32 : the head value of direction
+		case -32:{
+			c = getch();
+			int direction = 0;
+			switch(c){
+				case 72:{
+					direction = UP;
+					break;
+				}
+				case 80:{
+					direction = DOWN;
+					break;
+				}
+				case 75:{
+					direction = LEFT; 
+					break;
+				}
+				case 77:{
+					direction = RIGHT;
+					break;
+				}
+			}
+			return direction;
+		}
+		default:{
+
+			break;
+		}
+	}
 }
