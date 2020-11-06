@@ -23,22 +23,28 @@ int board[6][6];
 int InitBoard();
 int SetRandom();
 int ClearBoard();
+void ClearS();
 int PrintBoard();
-int Failed();
 int GetInput();
+
+int Merge(int);
 int Move(int);
+
+int FailJudge();
+int Failed();
 
 int test();
 int testboard1();
 
-//main function
+
+//---------------- MAIN FUNCTION ----------------
 int main(){
     test();
     return 0;
 }
 
 
-//-------- realize function --------
+//---------------- realize function ----------------
 
 int test(){
 	srand((int)time(NULL)); 
@@ -47,15 +53,24 @@ int test(){
 	
 	while(1){
 		int der = GetInput();
-		Move(der);
-		Merge(der);
-		Move(der);
-		SetRandom();
-		PrintBoard();
+		int perform = 0;
+		perform += Merge(der);
+		perform += Move(der);
+		if(FailJudge()){
+			Failed();
+			return 0;
+		}
+		else if(!perform){
+			printf("0\n");
+			continue;
+		}
+		else{
+			SetRandom();
+			ClearS();
+			PrintBoard();
+			printf("perform:%d\n",perform);
+		}
 	}
-	
-	
-	
 }
 
 int testboard1(){
@@ -66,11 +81,24 @@ int testboard1(){
 	board[4][1] = 4;
 }
 
+int FailJudge(){
+	for(int i=1;i<=4;i++){
+		for(int j=1;j<=4;j++){
+			if(board[i][j]){
+				return 0;
+			}
+		}
+	}
+	//if didn't return 0 then:
+	
+	
+}
+
 int SetRandom(){
 	int puted = 0;
 	
 	int tried[6][6];
-	int remain = 16;
+//	int remain = 16;
 	
 	memset(tried,0,sizeof(tried));
 	
@@ -79,10 +107,12 @@ int SetRandom(){
 		int i = t/4 +1;
 		int j = t%4 +1;
 		
+		/*
 		if(remain == 0){
-			printf("CAN'T PUT!\n");
+			Failed();
 			return 0;
 		}
+		*/
 		
 		if(tried[i][j]){
 			continue;
@@ -90,7 +120,7 @@ int SetRandom(){
 		else if(board[i][j]){
 			if(!tried[i][j]){
 				tried[i][j] = 1;
-				remain--;
+			//	remain--;
 			}
 			continue;
 		}
@@ -123,8 +153,12 @@ int InitBoard(){
     return 1;
 }
 
-int PrintBoard(){
+void ClearS(){
 	system("cls");
+}
+
+int PrintBoard(){
+//	system("cls");
 	for(int i=1;i<=4;i++){
 		for(int j=1;j<=4;j++){
 			printf("%-4d",board[i][j]);
@@ -146,6 +180,7 @@ int Merge(int direction){
 					int clo = i;
 					if(board[row][clo]){
 						if(value == board[row][clo]){
+							if_merged = 1;
 							value *= 2;
 							board[locate][clo] = value;
 							board[row][clo] = 0;
@@ -164,6 +199,7 @@ int Merge(int direction){
 					int clo = i;
 					if(board[row][clo]){
 						if(value == board[row][clo]){
+							if_merged = 1;
 							value *= 2;
 							board[locate][clo] = value;
 							board[row][clo] = 0;
@@ -182,6 +218,7 @@ int Merge(int direction){
 					int clo = j;
 					if(board[row][clo]){
 						if(value == board[row][clo]){
+							if_merged = 1;
 							value *= 2;
 							board[row][locate] = value;
 							board[row][clo] = 0;
@@ -200,6 +237,7 @@ int Merge(int direction){
 					int clo = 4-j+1;
 					if(board[row][clo]){
 						if(value == board[row][clo]){
+							if_merged = 1;
 							value *= 2;
 							board[row][locate] = value;
 							board[row][clo] = 0;
@@ -216,6 +254,7 @@ int Merge(int direction){
 			}
 		}
 	}
+	return if_merged; 
 }
 
 int Move(int direction){
@@ -232,6 +271,7 @@ int Move(int direction){
 					}
 					if(row !=5 && j != row){
 						board[j][i] = board[row][clo];
+						if_moved = 1;
 						board[row][clo] = 0;
 					}
 					break;
@@ -244,6 +284,7 @@ int Move(int direction){
 					}
 					if(row != 0 &&(4-j+1) != row){
 						board[4-j+1][i] = board[row][clo];
+						if_moved = 1;
 						board[row][clo] = 0;
 					}
 					break;
@@ -258,6 +299,7 @@ int Move(int direction){
 					}
 					if(clo != 5 && j != clo){
 						board[i][j] = board[row][clo];
+						if_moved = 1;
 						board[row][clo] = 0;
 					}
 					break;
@@ -270,6 +312,7 @@ int Move(int direction){
 					}
 					if(clo != 0 && (4-j+1) != clo){
 						board[i][4-j+1] = board[row][clo];
+						if_moved = 1;
 						board[row][clo] = 0;
 					}
 					break;
@@ -277,6 +320,7 @@ int Move(int direction){
 			}
 		}
 	}
+	return if_moved;
 }
 
 int GetInput(){
@@ -311,4 +355,8 @@ int GetInput(){
 			break;
 		}
 	}
+}
+
+int Failed(){
+	printf("Can't Add Number anymore!\n---- Gameover ----");
 }
