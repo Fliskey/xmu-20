@@ -17,9 +17,10 @@
 
 //global variable
 int board[6][6];
-
+int maxvalue = 0;
 
 //declear function
+#define MAX(x,y) x>y?x:y
 int InitBoard();
 int SetRandom();
 int ClearBoard();
@@ -32,6 +33,7 @@ int Move(int);
 
 int FailJudge();
 int Failed();
+int Succeed();
 
 int test();
 int testboard1();
@@ -61,9 +63,15 @@ int test(){
 			continue;
 		}
 		else{
-			SetRandom();
+			maxvalue = MAX(SetRandom(),maxvalue);
 			ClearS();
 			PrintBoard();
+		//	printf("max:%d\n",maxvalue);
+			if(maxvalue == 2048){
+				Succeed();
+				return 0;
+			}
+
 			int jg = FailJudge();
 			if(jg){
 				Failed();
@@ -195,7 +203,7 @@ int SetRandom(){
 		else if(!board[i][j]){
 			int value = 2*(rand()%2+1);
 			board[i][j] = value;
-			return 1;
+			return value;
 		}
 		else{
 			printf("ERROR!\n");
@@ -216,8 +224,10 @@ int ClearBoard(){
 
 int InitBoard(){
     ClearBoard();
-    SetRandom();
-    SetRandom();
+	int x1,x2;
+    x1 = SetRandom();
+    x2 = SetRandom();
+	maxvalue = MAX(maxvalue,MAX(x1,x2));
     return 1;
 }
 
@@ -229,7 +239,7 @@ int PrintBoard(){
 //	system("cls");
 	for(int i=1;i<=4;i++){
 		for(int j=1;j<=4;j++){
-			printf("%-4d",board[i][j]);
+			printf("%-5d",board[i][j]);
 		} 
 		printf("\n");
 	}
@@ -250,6 +260,7 @@ int Merge(int direction){
 						if(value == board[row][clo]){
 							if_merged = 1;
 							value *= 2;
+							maxvalue = MAX(maxvalue,value);
 							board[locate][clo] = value;
 							board[row][clo] = 0;
 							value = 0;
@@ -269,6 +280,7 @@ int Merge(int direction){
 						if(value == board[row][clo]){
 							if_merged = 1;
 							value *= 2;
+							maxvalue = MAX(maxvalue,value);
 							board[locate][clo] = value;
 							board[row][clo] = 0;
 							value = 0;
@@ -288,6 +300,7 @@ int Merge(int direction){
 						if(value == board[row][clo]){
 							if_merged = 1;
 							value *= 2;
+							maxvalue = MAX(maxvalue,value);
 							board[row][locate] = value;
 							board[row][clo] = 0;
 							value = 0;
@@ -307,6 +320,7 @@ int Merge(int direction){
 						if(value == board[row][clo]){
 							if_merged = 1;
 							value *= 2;
+							maxvalue = MAX(maxvalue,value);
 							board[row][locate] = value;
 							board[row][clo] = 0;
 							value = 0;
@@ -427,4 +441,8 @@ int GetInput(){
 
 int Failed(){
 	printf("Can't Add Number anymore!\n---- Gameover ----");
+}
+
+int Succeed(){
+	printf("You have merged a 2048!\n---- You win ----");
 }
