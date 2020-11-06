@@ -39,7 +39,7 @@ int testboard1();
 
 //---------------- MAIN FUNCTION ----------------
 int main(){
-    test();
+	test();
     return 0;
 }
 
@@ -56,19 +56,20 @@ int test(){
 		int perform = 0;
 		perform += Merge(der);
 		perform += Move(der);
-		if(FailJudge()){
-			Failed();
-			return 0;
-		}
-		else if(!perform){
-			printf("0\n");
+		if(!perform){
+		//	printf("0\n");
 			continue;
 		}
 		else{
 			SetRandom();
 			ClearS();
 			PrintBoard();
-			printf("perform:%d\n",perform);
+			int jg = FailJudge();
+			if(jg){
+				Failed();
+				return 0;
+			}
+		//	printf("perform:%d\n",perform);
 		}
 	}
 }
@@ -81,17 +82,84 @@ int testboard1(){
 	board[4][1] = 4;
 }
 
+int testboard2(){
+	ClearBoard();
+	board[1][1]=1;board[1][2]=2;board[1][3]=3;board[1][4]=4;
+	board[2][1]=5;board[2][2]=6;board[2][3]=7;board[2][4]=8;
+	board[3][1]=9;board[3][2]=10;board[3][3]=11;board[3][4]=12;
+	board[4][1]=13;board[4][2]=14;board[4][3]=14;board[4][4]=16;
+}
+
 int FailJudge(){
+	int if_merged = 0;
 	for(int i=1;i<=4;i++){
+		int value[5] = {0};
+		int locate[5] = {0};
 		for(int j=1;j<=4;j++){
-			if(board[i][j]){
+			if(!board[i][j]){
+			//	printf("1 %d %d\n",i,j);
 				return 0;
 			}
+			//if didn't return 0 then judge whether can merge
+			int row;
+			int clo;
+			//UP:
+			row = j;
+			clo = i;
+			
+				if(value[1] == board[row][clo]){
+				//	printf("21 %d %d\n",i,j);
+					return 0;
+				}
+				else{
+					value[1] = board[row][clo];
+					locate[1] = row;
+				}
+					
+			//DOWN:
+			row = 4-j+1;
+			clo = i;
+			
+				if(value[2] == board[row][clo]){
+				//	printf("22 %d %d\n",i,j);
+					return 0;
+				}
+				else{
+					value[2] = board[row][clo];
+					locate[2] = row;
+				}
+					
+			//LEFT:
+			row = i;
+			clo = j;
+			
+				if(value[3] == board[row][clo]){
+				//	printf("23 %d %d\n",i,j);
+					return 0;
+				}
+				else{
+					value[3] = board[row][clo];
+					locate[3] = clo;
+				}
+					
+			//RIGHT:
+			row = i;
+			clo = 4-j+1;
+			
+				if(value[4] == board[row][clo]){
+				//	printf("24 %d %d\n",i,j);
+					return 0;
+				}
+				else{
+					value[4] = board[row][clo];
+					locate[4] = clo;
+				}
 		}
 	}
-	//if didn't return 0 then:
 	
 	
+
+	return 1;
 }
 
 int SetRandom(){
