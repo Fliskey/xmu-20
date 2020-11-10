@@ -307,3 +307,27 @@ AbsoluteLocationPath ::= '/’ RelativeLocationPath? | AbbrevAbsoluteLocationPat
 - 对所查找到的节点按照指定方式进行筛选，给定<u>**筛选方式**</u>
 - 用[...]表示
 
+
+
+#### 数据类型
+
+- Schema所有类型
+- 新增的五种数据类型
+
+```
+xs:untyped			无类型结构化内容，未验证元素
+xs:anyAtomicType	所有原子类型的超类型
+xs:untypedAtomic	无类型的原子类型，未验证文本
+xs:yearMonthDuration	年月持续时间
+xs:dayTimeDuration		日期时间持续时间
+```
+
+- 通用节点类型：item
+  - 文档节点document()
+  - 元素节点element()
+  - 属性节点attribute()
+  - 文本节点text()
+  - 处理指令节点processing-instruction()
+  - 注释节点comment()
+  - 用户自定义类型
+
