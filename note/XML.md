@@ -331,3 +331,9 @@ xs:dayTimeDuration		日期时间持续时间
   - 注释节点comment()
   - 用户自定义类型
 
+## 5.XSLT
+
+XSLT语言是一种声明性语言
+
+XSLT程序只是包含了一些转换规则的XML文档
+

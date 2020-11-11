@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 int main(){
-    int a,b,c,d;
-    while(scanf("%d-%d-%d-%d",&a,&b,&c,&d) == 4){
+    int a,b,c;
+    char d;
+    while(scanf("%d-%d-%d-%c",&a,&b,&c,&d) == 4){
         int value = 0;
         value += a;
         value += b/100 *2;
@@ -14,12 +15,22 @@ int main(){
         value += c/10%10 *8;
         value += c%10 *9;
         value %= 11;
-        if(d == value){
-            printf("Right\n");
-        }
+        if(value == 10){
+        	if(d == 'X'){
+        		printf("Right\n");
+			}
+			else{
+				printf("%d-%d-%d-X\n",a,b,c);
+			}
+		}
         else{
-            printf("%d-%d-%d-%d\n",a,b,c,value);
-        }
+        	if(d-'0' == value){
+	            printf("Right\n");
+	        }
+	        else{
+	            printf("%d-%d-%d-%d\n",a,b,c,value);
+	        }
+		}
     }
     return 0;
 }
