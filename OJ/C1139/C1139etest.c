@@ -6,7 +6,7 @@ int main(){
     freopen("in.txt","w",stdout);
     srand((int)time(NULL));
     
-    int times = 10000;
+    int times = 1000;
     int max = 100000;
     int n;
     int b;

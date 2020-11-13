@@ -8,7 +8,7 @@ int sum[100004] = {0};
 
 int main(){
     int n,b;
-    
+    freopen("in.txt","r",stdin);freopen("wyx.txt","w",stdout);
     while(scanf("%d %d",&n,&b) != EOF){
         memset(num,0,sizeof(num));
         memset(left_count,0,sizeof(left_count));
