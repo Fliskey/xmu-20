@@ -18,18 +18,22 @@ int main(){
     	if(!is_first){
     		printf("\n");
 		}
+
         double value[204];
         memset(value,0,sizeof(value));
+
         for(int i=-100;i<=100;i++){
             value[i+100] = fx(i);
-        //	printf("%d:%.2f\n",i,value[i+100]);
         }
+
         double ans[204];
         int ansn = 0;
         memset(ans,0,sizeof(ans));
+
         if(value[0] == 0){
 			ans[++ansn] = -100;
 		}
+
         for(int i=-99;i<=100;i++){
             if(value[i+100] == 0){
             	ans[++ansn] = i;
@@ -65,6 +69,7 @@ int main(){
 				ans[++ansn] = m;
 			}
         }
+
         printf("%.2f %.2f %.2f",ans[1],ans[2],ans[3]);
 		is_first = 0;
     }
