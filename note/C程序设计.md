@@ -449,5 +449,9 @@ Recursive Functions
 
 ### 断言
 
-- assert()
+- assert(判断语句)
+
+
+
+
 

@@ -337,3 +337,75 @@ XSLT语言是一种声明性语言
 
 XSLT程序只是包含了一些转换规则的XML文档
 
+### 5.2 模板创建使用
+
+#### 模板声明
+
+完整模板声明语法
+
+```xml
+<xsl:template match=Pattern name=QName priority=Number as=Sequence-type></xsl:template>
+```
+
+match
+
+name
+
+mode
+
+priority
+
+as
+
+- 会返回一个XML元素作结果
+
+
+
+#### 模板调用
+
+**遍历（广度优先）中匹配调用**
+
+- 使用`xsl:apply-templates`在广度优先，逐层向下的遍历过程中调用模板
+
+- 语法
+
+  ```xml
+  <xsl:apply-templates select=Expression mode=QName>
+  </xsl:apply-templates>
+  ```
+
+- 例子
+
+  ```xml
+  <xsl:template match="/">       模板 1
+      <xsl:apply-templates/>
+  </xsl:template>
+  <xsl:template match="message"> 模板 2
+  	.....
+  </xsl:template>
+  ```
+
+- select属性
+
+  - XPath表达式，指定遍历当前节点的哪些子结点
+
+- mode属性
+
+
+
+**用名称直接调用**
+
+- 语法
+
+  ```xml
+  <xsl:call-template name = qname>
+    <!-- Content: xsl:with-param* -->
+  </xsl:call-template> 
+  ```
+
+- q使用xsl:template声明模板时，可以通过xsl:param声明参数；
+
+- q使用xsl:with-param元素，可以在xsl:call-template或者xsl:apply-templates中传递调用参数。
+
+#### 内置模板
+

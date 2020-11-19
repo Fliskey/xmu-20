@@ -6,7 +6,7 @@
 #define NMAX 100
 using namespace std;
 
-int G[NMAX][NMAX];//×î´óÖ§³ÖNMAX¸ö¶¥µãµÄÁÚ½Ó¾ØÕó 
+int G[NMAX][NMAX];//æœ€å¤§æ”¯æŒNMAXä¸ªé¡¶ç‚¹çš„é‚»æ¥çŸ©é˜µ 
 int visited[NMAX];
 int vqueue[NMAX];
 int vqhead = 0;
@@ -15,14 +15,14 @@ int vqtail = 0;
 int deleted[NMAX] = {0};
 int deleted_l = 0; 
 
-//º¯Êı¶¨Òå 
+//å‡½æ•°å®šä¹‰ 
 void DFS(int,int);
 void DFSbegin(int,int);
 void BFS(int,int);
 void BFSbegin(int,int);
 
-void CreatG_ND_NW(int*,int*);//ÎŞÏòÍ¼²»´øÈ¨ÖØ 
-void CreatG_D_W(int*,int*);//ÓĞÏòÍ¼´øÈ¨ÖØ 
+void CreatG_ND_NW(int*,int*);//æ— å‘å›¾ä¸å¸¦æƒé‡ 
+void CreatG_D_W(int*,int*);//æœ‰å‘å›¾å¸¦æƒé‡ 
 
 void PrintGV(int);
 void DelGV(int,int);
@@ -47,10 +47,10 @@ int main(){
 }
 
 
-//º¯ÊıÊµÏÖ²¿·Ö 
+//å‡½æ•°å®ç°éƒ¨åˆ† 
 
 void test1(){
-	printf("\n\n-------- ÎŞÏòÍ¼È«×Ô¶¯Ê¾Àı --------\n\n");
+	printf("\n\n-------- æ— å‘å›¾å…¨è‡ªåŠ¨ç¤ºä¾‹ --------\n\n");
 	freopen("G1in.txt","r",stdin);
 	memset(G,0,sizeof(G));
 	
@@ -60,12 +60,12 @@ void test1(){
 	PrintGV(n);
 	
 	
-	printf("ÇëÊäÈëÒªÉ¾³ıµãµÄ±àºÅ£º");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤ç‚¹çš„ç¼–å·ï¼š");
 	int del;
 	scanf("%d",&del);
 	printf("%d\n",del);
 	DelGV(n,del);
-	printf("É¾³ı³É¹¦£¬ÒÑÊÍ·Å¸Ã±àºÅ£¡\n");
+	printf("åˆ é™¤æˆåŠŸï¼Œå·²é‡Šæ”¾è¯¥ç¼–å·ï¼\n");
 	PrintGV(n);
 	
 	ApplyGV(&n);
@@ -74,21 +74,21 @@ void test1(){
 	AddGV_ND_NW();
 	PrintGV(n);
 	
-	printf("ÇëÊäÈëĞèÒª²éÕÒµãµÄ±àºÅ£º");
+	printf("è¯·è¾“å…¥éœ€è¦æŸ¥æ‰¾ç‚¹çš„ç¼–å·ï¼š");
 	int ques;
 	scanf("%d",&ques);
-	printf("%d\n¸ÃµãÓëÕâĞ©µãÏàÍ¨£º",ques);
+	printf("%d\nè¯¥ç‚¹ä¸è¿™äº›ç‚¹ç›¸é€šï¼š",ques);
 	Can_in(n,ques);
 	printf("\n"); 
 	
-	printf("\nÇëÊäÈëËÑË÷µÄÆğÊ¼µã±àºÅ£º");
+	printf("\nè¯·è¾“å…¥æœç´¢çš„èµ·å§‹ç‚¹ç¼–å·ï¼š");
 	int Sstart;
 	scanf("%d",&Sstart); 
 	printf("%d",Sstart);
-	printf("\nÉî¶ÈÓÅÏÈËÑË÷±éÀúË³Ğò£º"); 
+	printf("\næ·±åº¦ä¼˜å…ˆæœç´¢éå†é¡ºåºï¼š"); 
 	DFSbegin(Sstart,n);
 	
-	printf("\n¹ã¶ÈÓÅÏÈËÑË÷±éÀúË³Ğò£º"); 
+	printf("\nå¹¿åº¦ä¼˜å…ˆæœç´¢éå†é¡ºåºï¼š"); 
 	BFSbegin(Sstart,n);
 	
 	fclose(stdin); 
@@ -96,7 +96,7 @@ void test1(){
 } 
 
 void test2(){
-	printf("\n\n-------- ÓĞÏò´øÈ¨Í¼È«×Ô¶¯Ê¾Àı --------\n\n");
+	printf("\n\n-------- æœ‰å‘å¸¦æƒå›¾å…¨è‡ªåŠ¨ç¤ºä¾‹ --------\n\n");
 	freopen("G2in.txt","r",stdin);
 	memset(G,0,sizeof(G));
 	
@@ -105,14 +105,14 @@ void test2(){
 	
 	PrintGV(n); 
 	
-	printf("\nÇëÊäÈëËÑË÷µÄÆğÊ¼µã±àºÅ£º");
+	printf("\nè¯·è¾“å…¥æœç´¢çš„èµ·å§‹ç‚¹ç¼–å·ï¼š");
 	int Sstart;
 	scanf("%d",&Sstart); 
 	printf("%d",Sstart);
-	printf("\nÉî¶ÈÓÅÏÈËÑË÷±éÀúË³Ğò£º"); 
+	printf("\næ·±åº¦ä¼˜å…ˆæœç´¢éå†é¡ºåºï¼š"); 
 	DFSbegin(Sstart,n);
 	
-	printf("\n¹ã¶ÈÓÅÏÈËÑË÷±éÀúË³Ğò£º"); 
+	printf("\nå¹¿åº¦ä¼˜å…ˆæœç´¢éå†é¡ºåºï¼š"); 
 	BFSbegin(Sstart,n);
 	
 	fclose(stdin); 
@@ -122,7 +122,7 @@ void test2(){
 
 
 void PrintGV(int n){
-	printf("\nÁÚ½Ó±í£º\n");
+	printf("\né‚»æ¥è¡¨ï¼š\n");
 	for(int i=1;i<=n;i++){
 		for(int j=1;j<=n;j++){
 			printf("%d ",G[i][j]);
@@ -152,13 +152,13 @@ void ApplyGV(int *n){
 		newl = deleted[deleted_l];
 		deleted[deleted_l] = 0;
 	} 
-	printf("ÉêÇëĞÂ½áµã±àºÅ³É¹¦£¬±àºÅÎª£º%d\n",newl);
+	printf("ç”³è¯·æ–°ç»“ç‚¹ç¼–å·æˆåŠŸï¼Œç¼–å·ä¸ºï¼š%d\n",newl);
 	return;
 }
 
 void AddGV_ND_NW(){
 	int x,y;
-	printf("ÇëÊäÈëÒªÔö¼Ó±ßµÄÁ½¸öµã£º");
+	printf("è¯·è¾“å…¥è¦å¢åŠ è¾¹çš„ä¸¤ä¸ªç‚¹ï¼š");
 	scanf("%d %d",&x,&y);
 	printf("%d %d\n",x,y);
 	
@@ -187,15 +187,15 @@ void Can_out(int n,int e){
 
 
 void CreatG_D_W(int *n,int *m){
-	printf("ÇëÊäÈë¶¥µã¸öÊı£º");
+	printf("è¯·è¾“å…¥é¡¶ç‚¹ä¸ªæ•°ï¼š");
 	scanf("%d",n);
 	printf("%d\n",*n);
 	
-	printf("ÇëÊäÈë»¡µÄÌõÊı£º"); 
+	printf("è¯·è¾“å…¥å¼§çš„æ¡æ•°ï¼š"); 
 	scanf("%d",m);
 	printf("%d\n",*m);
 	
-	printf("Ã¿×éÊäÈëÆğÊ¼µã¡¢ÖÕµã¡¢È¨ÖØ£¬ÒÔ¿Õ¸ñ¸ô¿ª£º\n");
+	printf("æ¯ç»„è¾“å…¥èµ·å§‹ç‚¹ã€ç»ˆç‚¹ã€æƒé‡ï¼Œä»¥ç©ºæ ¼éš”å¼€ï¼š\n");
 	
 	for(int i=1;i<=*m;i++){
 		printf("%d. ",i);
@@ -207,15 +207,15 @@ void CreatG_D_W(int *n,int *m){
 }
 
 void CreatG_ND_NW(int *n,int *m){
-	printf("ÇëÊäÈë¶¥µã¸öÊı£º");
+	printf("è¯·è¾“å…¥é¡¶ç‚¹ä¸ªæ•°ï¼š");
 	scanf("%d",n);
 	printf("%d\n",*n);
 	
-	printf("ÇëÊäÈë±ßµÄÌõÊı£º"); 
+	printf("è¯·è¾“å…¥è¾¹çš„æ¡æ•°ï¼š"); 
 	scanf("%d",m);
 	printf("%d\n",*m);
 	
-	printf("Ã¿×éÊäÈëÁ½¸öµã£¬ÒÔ¿Õ¸ñ¸ô¿ª£º\n");
+	printf("æ¯ç»„è¾“å…¥ä¸¤ä¸ªç‚¹ï¼Œä»¥ç©ºæ ¼éš”å¼€ï¼š\n");
 	
 	for(int i=1;i<=*m;i++){
 		printf("%d. ",i);
