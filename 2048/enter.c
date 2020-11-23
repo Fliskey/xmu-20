@@ -14,6 +14,7 @@
 //global variable
 int board[6][6] = {0};
 int maxvalue = 0;
+int goal = 0;
 
 
 //---------------- MAIN FUNCTION ----------------

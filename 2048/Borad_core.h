@@ -11,6 +11,7 @@
 //global var
 extern int board[6][6];
 extern int maxvalue;
+extern int goal;
 
 //declear function
 #define MAX(x,y) x>y?x:y
@@ -31,6 +32,7 @@ int GetInput();
 
 //-------- init & setrandom --------
 int InitBoard(){
+    goal = 0;
     ClearBoard();
 	int x1,x2;
     x1 = SetRandom();
