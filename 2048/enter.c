@@ -20,6 +20,7 @@ int goal = 0;
 //---------------- MAIN FUNCTION ----------------
 int main(){
 	srand((int)time(NULL)); 
+	
 	InitBoard();
 	PrintBoard();
 	

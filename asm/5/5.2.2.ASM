@@ -1,0 +1,38 @@
+DATAS SEGMENT
+    ;此处输入数据段代码  
+    BUFFER1 DB 008H
+    BUFFER2 DB 006H
+    BUFFER3 DB 002H
+    BUFFER4 DB 004H
+DATAS ENDS
+
+STACKS SEGMENT
+    ;此处输入堆栈段代码
+STACKS ENDS
+
+CODES SEGMENT
+    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+START:
+    MOV AX,DATAS
+    MOV DS,AX
+    ;此处输入代码段代码
+    
+    MOV BX,0
+    MOV DX,0
+    MOV CL,4
+    
+A:    CMP BX,04H
+	JE AEND
+    MOV AH,[BX]
+    OR DH,AH
+    ROR DX,CL
+    INC BX
+    JMP A
+    
+AEND:	ROR DX,CL
+	ROR DX,CL
+    
+    MOV AH,4CH
+    INT 21H
+CODES ENDS
+    END START
