@@ -8,10 +8,6 @@ typedef struct Node{
     struct Node *next;
 }Node,*Linklist;
 
-void swap(Linklist l1_front,Linklist l2_front){
-	
-}
-
 int main(){
 	
 	freopen("in.txt","r",stdin);
@@ -68,19 +64,38 @@ int main(){
     
     Linklist k;
     k = Head->next;
+    
+    Node ans[1004];
 
     while(k){
         printf("%s(%d)\n",k->word,k->count);
+
         k = k->next;
     }
     
-    //sort
-	Linklist p;
-	p = Head;
+    /*
+	//choose sort
+    int numi = 0;
+    for( ;numi<1000;numi++){
+        if(Head->next == NULL){
+            break;
+        }
+        int max = 0;
+        Linklist maxp,loop;
+        loop = Head;
+        while(loop->next){
+            if(loop->next->count > max){
+                maxp = loop;
+                max = loop->next->count;
+            }
+        }
+        ans[numi] = *(maxp->next);
+        maxp->next = maxp->next->next;
+    }
+    for(int i=0;i<numi;i++){
+        printf("%s(%d)\n",ans[i].word,ans[i].count);
+    }
 	
-	while(p->next){
-		
-	}
-
+	*/ 
     return 0;
 }
