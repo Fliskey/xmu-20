@@ -19,6 +19,7 @@ int InitBoard();
 int SetRandom();
 
 int Merge(int);
+int Merge_cldfunc(int*,int*,int*,int,int,int);
 int Move(int);
 
 int ClearBoard();
@@ -37,8 +38,9 @@ int InitBoard(){
 	int x1,x2;
     x1 = SetRandom();
     x2 = SetRandom();
-	maxvalue = MAX(maxvalue,MAX(x1,x2));
-    return 1;
+	int maxvalue = MAX(x1,x2);
+//	printf("%d\n",maxvalue);
+    return maxvalue;
 }
 
 int SetRandom(){
@@ -72,6 +74,7 @@ int SetRandom(){
 		else if(!board[i][j]){
 			int value = 2*(rand()%2+1);
 			board[i][j] = value;
+		//	printf("%d\n",value);
 			return value;
 		}
 		else{
@@ -82,96 +85,60 @@ int SetRandom(){
 
 //-------- merge & move --------
 int Merge(int direction){
-	int if_merged = 0;
+	int if_merged = 0;		
 	for(int i=1;i<=4;i++){
 		int value = 0;
 		int locate = 0;
 		for(int j=1;j<=4;j++){
 			switch(direction){
 				case UP:{
-					int row = j;
-					int clo = i;
-					if(board[row][clo]){
-						if(value == board[row][clo]){
-							if_merged = 1;
-							value *= 2;
-							maxvalue = MAX(maxvalue,value);
-							board[locate][clo] = value;
-							board[row][clo] = 0;
-							value = 0;
-							locate = 0;
-						}
-						else{
-							value = board[row][clo];
-							locate = row;
-						}
-					}
+					Merge_cldfunc(&value,&if_merged,&locate,j,i,direction);
 					break;
 				}
 				case DOWN:{
-					int row = 4-j+1;
-					int clo = i;
-					if(board[row][clo]){
-						if(value == board[row][clo]){
-							if_merged = 1;
-							value *= 2;
-							maxvalue = MAX(maxvalue,value);
-							board[locate][clo] = value;
-							board[row][clo] = 0;
-							value = 0;
-							locate = 0;
-						}
-						else{
-							value = board[row][clo];
-							locate = row;
-						}
-					}
+					Merge_cldfunc(&value,&if_merged,&locate,4-j+1,i,direction);
 					break;
 				}
 				case LEFT:{
-					int row = i;
-					int clo = j;
-					if(board[row][clo]){
-						if(value == board[row][clo]){
-							if_merged = 1;
-							value *= 2;
-							maxvalue = MAX(maxvalue,value);
-							board[row][locate] = value;
-							board[row][clo] = 0;
-							value = 0;
-							locate = 0;
-						}
-						else{
-							value = board[row][clo];
-							locate = clo;
-						}
-					}
+					Merge_cldfunc(&value,&if_merged,&locate,i,j,direction);
 					break;
 				}
 				case RIGHT:{
-					int row = i;
-					int clo = 4-j+1;
-					if(board[row][clo]){
-						if(value == board[row][clo]){
-							if_merged = 1;
-							value *= 2;
-							maxvalue = MAX(maxvalue,value);
-							board[row][locate] = value;
-							board[row][clo] = 0;
-							value = 0;
-							locate = 0;
-						}
-						else{
-							value = board[row][clo];
-							locate = clo;
-						}
-					}
+					Merge_cldfunc(&value,&if_merged,&locate,i,4-j+1,direction);
 					break;
 				}
 			}
 		}
 	}
 	return if_merged; 
+}
+
+int Merge_cldfunc(int *value,int *if_merged,int *locate,int row,int clo,int direction){
+	if(board[row][clo]){
+		if(*value == board[row][clo]){
+			*if_merged = 1;
+			*value *= 2;
+			maxvalue = MAX(maxvalue,*value);
+            if(direction == UP || direction == DOWN){
+                board[*locate][clo] = *value;
+            }
+            else{
+                board[row][*locate] = *value;
+            }
+			board[row][clo] = 0;
+			*value = 0;
+			*locate = 0;
+		}
+		else{
+			*value = board[row][clo];
+            if(direction == UP || direction == DOWN){
+                *locate = row;
+            }
+			else{
+                *locate = clo;
+            }
+		}
+	}
 }
 
 int Move(int direction){
@@ -256,7 +223,9 @@ void ClearS(){
 }
 
 int PrintBoard(){
+	printf("\n");
 	for(int i=1;i<=4;i++){
+		printf("    ");
 		for(int j=1;j<=4;j++){
 			printf("%-5d",board[i][j]);
 		} 

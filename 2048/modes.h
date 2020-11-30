@@ -1,12 +1,17 @@
 //-------- 2048GAME:modes --------
 //0474-Fliskey
+#define MAX(x,y) x>y?x:y
 
 extern int borad[6][6];
 extern int goal;
+extern const int TARGET;
 
 //gaming mode
 int mode_gaming(){
-    InitBoard();
+	extern int maxvalue;
+    maxvalue = InitBoard();
+    printf("-------- Gaming --------\n");
+    printf("Max value:%-5d Goal:%-6d\n",maxvalue,goal);
 	PrintBoard();
 	
 	while(1){
@@ -21,9 +26,11 @@ int mode_gaming(){
 		else{
 			maxvalue = MAX(SetRandom(),maxvalue);
 			ClearS();
+			printf("-------- Gaming --------\n");
+			printf("Max value:%-6d Goal:%-6d\n",maxvalue,goal);
 			PrintBoard();
 		//	printf("max:%d\n",maxvalue);
-			if(maxvalue == 2048){
+			if(maxvalue == TARGET){
 				Succeed();
 				return 0;
 			}
@@ -40,8 +47,9 @@ int mode_gaming(){
 
 int mode_gaming_menu(){
     ClearS();
+	printf("---- Pause ----\n");
     printf("Press a Key to select:\n");
     printf("R: Restart\n");
     printf("Q: Back to Home\n");
-    printf("")
+    printf("");
 }

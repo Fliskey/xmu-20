@@ -3,6 +3,7 @@
 
 //global var
 extern int board[6][6];
+extern const int TARGET;
 
 int FailJudge();
 int Failed();
@@ -80,9 +81,9 @@ int FailJudge(){
 
 
 int Failed(){
-	printf("Can't Add Number anymore!\n---- Gameover ----");
+	printf("Can't Add Number anymore!\n-------- Gameover --------");
 }
 
 int Succeed(){
-	printf("You have merged a 2048!\n---- You win ----");
+	printf("You have merged a %d!\n-------- You win --------",TARGET);
 }

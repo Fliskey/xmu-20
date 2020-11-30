@@ -7,50 +7,38 @@
 #include <time.h>
 #include <string.h>
 #include <windows.h>
-#include "test.h"
+//#include "test.h"
 #include "Borad_core.h"
 #include "Judge.h"
+#include "modes.h"
 
 //global variable
+const int TARGET=64;
 int board[6][6] = {0};
 int maxvalue = 0;
 int goal = 0;
 
+//function declear
+int InitBoard();
+int SetRandom();
+
+int Merge(int);
+int Move(int);
+
+int ClearBoard();
+void ClearS();
+int PrintBoard();
+
+int GetInput();
+int FailJudge();
+int Failed();
+int Succeed();
+ 
 
 //---------------- MAIN FUNCTION ----------------
 int main(){
 	srand((int)time(NULL)); 
-	
-	InitBoard();
-	PrintBoard();
-	
-	while(1){
-		int der = GetInput();
-		int perform = 0;
-		perform += Merge(der);
-		perform += Move(der);
-		if(!perform){
-		//	printf("0\n");
-			continue;
-		}
-		else{
-			maxvalue = MAX(SetRandom(),maxvalue);
-			ClearS();
-			PrintBoard();
-		//	printf("max:%d\n",maxvalue);
-			if(maxvalue == 2048){
-				Succeed();
-				return 0;
-			}
-
-			int jg = FailJudge();
-			if(jg){
-				Failed();
-				return 0;
-			}
-		//	printf("perform:%d\n",perform);
-		}
-	}
+	mode_gaming();
 
     return 0;
 }
