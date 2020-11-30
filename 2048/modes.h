@@ -10,6 +10,17 @@ extern int borad[6][6];
 extern int goal;
 extern const int TARGET;
 
+int start_page(){
+	
+}
+
+int home_page(){
+	printf("-------- Home Page --------\n");
+	printf("Menu:\n");
+	printf("S : Start\n");
+	printf("Q : Quit\n");
+}
+
 //gaming mode
 int mode_gaming(){
 	extern int maxvalue;
