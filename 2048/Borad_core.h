@@ -7,6 +7,7 @@
 #define DOWN 22
 #define LEFT 32
 #define RIGHT 42
+#define PAUSE 11
 
 //global var
 extern int board[6][6];
@@ -118,6 +119,7 @@ int Merge_cldfunc(int *value,int *if_merged,int *locate,int row,int clo,int dire
 		if(*value == board[row][clo]){
 			*if_merged = 1;
 			*value *= 2;
+			goal += *value;
 			maxvalue = MAX(maxvalue,*value);
             if(direction == UP || direction == DOWN){
                 board[*locate][clo] = *value;
@@ -262,8 +264,14 @@ int GetInput(){
 			}
 			return direction;
 		}
+		case 'p':{
+			return PAUSE;
+		}
+		case 'P':{
+			return PAUSE;
+		}
 		default:{
-
+			return 0;
 			break;
 		}
 	}
