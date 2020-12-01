@@ -6,11 +6,7 @@ extern int maxvalue;
 
 #define MAX(x,y) x>y?x:y
 
-int test();
-int testboard1();
-int testboard2();
-
-
+/*
 int test(){
 	srand((int)time(NULL)); 
 	InitBoard();
@@ -59,4 +55,21 @@ int testboard2(){
 	board[2][1]=5;board[2][2]=6;board[2][3]=7;board[2][4]=8;
 	board[3][1]=9;board[3][2]=10;board[3][3]=11;board[3][4]=12;
 	board[4][1]=13;board[4][2]=14;board[4][3]=14;board[4][4]=16;
+}*/
+
+int testDec1(){
+	InitBoard();
+	ClearS();
+	PrintBoard();
+	save_push();
+	scanf("\n");
+	SetRandom();
+	ClearS();
+	PrintBoard();
+	scanf("\n");
+	save_pop();
+	ClearS();
+	PrintBoard();
+	scanf("\n");
+	return 0;
 }

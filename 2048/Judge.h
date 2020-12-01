@@ -22,57 +22,53 @@ int FailJudge(){
 			//if didn't return 0 then judge whether can merge
 			int row;
 			int clo;
-			//UP:
-			row = j;
-			clo = i;
 			
-				if(value[1] == board[row][clo]){
-				//	printf("21 %d %d\n",i,j);
-					return 0;
+			for(int k=1;k<=4;k++){
+				switch(k){
+					case 1:{
+						//UP:
+						row = j;
+						clo = i;
+						break;
+					}
+					case 2:{
+						//DOWN:
+						row = 4-j+1;
+						clo = i;
+						break;
+					}
+					case 3:{
+						//LEFT:
+						row = i;
+						clo = j;
+						break;
+					}
+					case 4:{
+						//RIGHT:
+						row = i;
+						clo = 4-j+1;
+						break;
+					}
+				}
+				if(k <= 2){
+					if(value[k] == board[row][clo]){
+						return 0;
+					}
+					else{
+						value[k] = board[row][clo];
+						locate[k] = row;
+					}
 				}
 				else{
-					value[1] = board[row][clo];
-					locate[1] = row;
+					if(value[k] == board[row][clo]){
+						return 0;
+					}
+					else{
+						value[k] = board[row][clo];
+						locate[k] = clo;
+					}
 				}
-					
-			//DOWN:
-			row = 4-j+1;
-			clo = i;
-			
-				if(value[2] == board[row][clo]){
-				//	printf("22 %d %d\n",i,j);
-					return 0;
-				}
-				else{
-					value[2] = board[row][clo];
-					locate[2] = row;
-				}
-					
-			//LEFT:
-			row = i;
-			clo = j;
-			
-				if(value[3] == board[row][clo]){
-				//	printf("23 %d %d\n",i,j);
-					return 0;
-				}
-				else{
-					value[3] = board[row][clo];
-					locate[3] = clo;
-				}
-					
-			//RIGHT:
-			row = i;
-			clo = 4-j+1;
-			
-				if(value[4] == board[row][clo]){
-				//	printf("24 %d %d\n",i,j);
-					return 0;
-				}
-				else{
-					value[4] = board[row][clo];
-					locate[4] = clo;
-				}
+			}
 		}
 	}
 
@@ -81,9 +77,9 @@ int FailJudge(){
 
 
 int Failed(){
-	printf("Can't Add Number anymore!\n-------- Gameover --------");
+	printf("-------- Gameover --------\nCan't Add Number anymore!\n");
 }
 
 int Succeed(){
-	printf("You have merged a %d!\n-------- You win --------",TARGET);
+	printf("-------- You win --------\nYou have merged a %d!\n",TARGET);
 }

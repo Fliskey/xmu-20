@@ -14,6 +14,7 @@ extern int board[6][6];
 extern int maxvalue;
 extern int goal;
 
+
 //declear function
 #define MAX(x,y) x>y?x:y
 int InitBoard();

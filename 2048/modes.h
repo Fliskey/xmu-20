@@ -5,15 +5,29 @@
 #define QUIT 352
 #define HOME 353
 #define CONTI 354
+#define REDO 355
 
 extern int borad[6][6];
 extern int goal;
 extern const int TARGET;
+extern int save_point;
+extern int max_save_number;
+
+int mode_gaming();
+int PrintScreen();
+int Print_gaming_menu();
+int Input_menu();
+
 
 //gaming mode
 int mode_gaming(){
 	extern int maxvalue;
     maxvalue = InitBoard();
+    goal = 0;
+	save_point = 0;
+
+	save_push();
+
 	ClearS();
     PrintScreen();
 	
@@ -36,6 +50,21 @@ int mode_gaming(){
 				case QUIT:{
 					return QUIT;
 				}
+				case REDO:{
+					int re = save_pop();
+					if(re == 0){
+						ClearS();
+						PrintScreen();
+						printf("Redo Failed!\n");
+						break;
+					}
+					else{
+						ClearS();
+						PrintScreen();
+						printf("Redo Succeed!\n");
+						break;
+					}
+				}
 				default:{
 					printf("ERROR!\n");
 				}
@@ -52,6 +81,9 @@ int mode_gaming(){
 			maxvalue = MAX(SetRandom(),maxvalue);
 			ClearS();
 			PrintScreen();
+			
+			save_push();
+
 		//	printf("max:%d\n",maxvalue);
 			if(maxvalue == TARGET){
 				Succeed();
@@ -81,8 +113,8 @@ int Print_gaming_menu(){
     printf("Press a Key to select:\n");
     printf("R: Restart\n");
 	printf("Q: Quit Game\n");
-//	printf("H: Back to Home\n");
     printf("C: Game continue\n");
+	printf("Z: Redo(%d times limited)\n",max_save_number);
 }
 
 int Input_menu(){
@@ -102,14 +134,12 @@ int Input_menu(){
 			case 'q':{
 				return QUIT;
 			}
-			/*
-			case 'H':{
-				return HOME;
+			case 'Z':{
+				return REDO;
 			}
-			case 'h':{
-				return HOME;
+			case 'z':{
+				return REDO;
 			}
-			*/
 			case 'C':{
 				return CONTI;
 			}
