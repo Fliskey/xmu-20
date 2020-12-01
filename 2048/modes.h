@@ -6,6 +6,8 @@
 #define HOME 353
 #define CONTI 354
 #define REDO 355
+#define SAVE 356
+#define LOAD 357
 
 extern int borad[6][6];
 extern int goal;
@@ -65,8 +67,24 @@ int mode_gaming(){
 						break;
 					}
 				}
+				case SAVE:{
+					save_to_disk();
+					ClearS();
+					PrintScreen();
+					printf("Save Succeed!\n");
+					break;
+				}
+				case LOAD:{
+					load_from_disk();
+					ClearS();
+					PrintScreen();
+					printf("Load Succeed!\n");
+					save_point = 0;
+					break;
+				}
 				default:{
 					printf("ERROR!\n");
+					break;
 				}
 			}
 		}
@@ -110,11 +128,13 @@ int PrintScreen(){
 int Print_gaming_menu(){
 //	ClearS();
 	printf("-------- Pause --------\n");
-    printf("Press a Key to select:\n");
-    printf("R: Restart\n");
-	printf("Q: Quit Game\n");
-    printf("C: Game continue\n");
-	printf("Z: Redo(%d times limited)\n",max_save_number);
+    printf("\nPress a Key to select:\n");
+	printf("- Z: Redo\n");
+    printf("- R: Restart\n");
+	printf("- S: Save Game\n");
+	printf("- L: Load Game\n");
+	printf("- Q: Quit Game\n");
+    printf("- C: Game continue\n");
 }
 
 int Input_menu(){
@@ -145,6 +165,18 @@ int Input_menu(){
 			}
 			case 'c':{
 				return CONTI;
+			}
+			case 'S':{
+				return SAVE;
+			}
+			case 's':{
+				return SAVE;
+			}
+			case 'L':{
+				return LOAD;
+			}
+			case 'l':{
+				return LOAD;
 			}
 			default:{
 				break;

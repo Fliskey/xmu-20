@@ -10,6 +10,39 @@ extern int save_maxvalue[1004];
 extern int save_board[1004][6][6];
 extern int save_point;
 
+int check_disk(){
+    FILE *data = fopen("save.data","r");
+    int flag;
+    if(fscanf(data,"%d",&flag) == EOF){
+        fclose(data);
+        return 0;
+    }
+    fclose(data);
+    return 1;
+}
+
+int save_to_disk(){
+    FILE *data = fopen("save.data","w");
+    fprintf(data,"%d %d\n",maxvalue,goal);
+    for(int i=1;i<=4;i++){
+        for(int j=1;j<=4;j++){
+            fprintf(data,"%d ",board[i][j]);
+        }
+    }
+    fclose(data);
+}
+
+int load_from_disk(){
+    FILE *data = fopen("save.data","r");
+    fscanf(data,"%d %d",&maxvalue,&goal);
+    for(int i=1;i<=4;i++){
+        for(int j=1;j<=4;j++){
+            fscanf(data,"%d",&board[i][j]);
+        }
+    }
+    fclose(data);
+}
+
 int board_copy(int to[6][6],int from[6][6]){
     for(int i=1;i<=4;i++){
         for(int j=1;j<=4;j++){

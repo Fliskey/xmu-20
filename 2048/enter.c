@@ -7,6 +7,8 @@
 #include <time.h>
 #include <string.h>
 #include <windows.h>
+
+//functions declear
 #include "Borad_core.h"
 #include "Judge.h"
 #include "modes.h"
@@ -29,7 +31,6 @@ int max_save_number = 1000;
 int main(){
 	srand((int)time(NULL)); 
 	while(mode_gaming() == RESTART);
-	
 	
     return 0;
 }

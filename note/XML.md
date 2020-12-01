@@ -407,7 +407,23 @@ as
 
 - q使用xsl:with-param元素，可以在xsl:call-template或者xsl:apply-templates中传递调用参数。
 
-#### 内置模板
 
 
+5.3.5 变量声明与使用
+
+```xml
+<xsl:variable name = QName select = Expression>
+......
+</xsl:variable>
+```
+
+- 带select属性，变量的值是表达式得出的结果
+- 没有select属性，在整个variable中定义，可以是复杂的值
+- 使用变量值需要加`$`符号
+
+
+
+5.4 其他编程机制
+
+5.4.1 模块化XSLT
 
