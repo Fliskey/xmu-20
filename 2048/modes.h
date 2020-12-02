@@ -105,13 +105,13 @@ int mode_gaming(){
 		//	printf("max:%d\n",maxvalue);
 			if(maxvalue == TARGET){
 				Succeed();
-				return 0;
+				return End_choose();
 			}
 
 			int jg = FailJudge();
 			if(jg){
 				Failed();
-				return 0;
+				return End_choose();
 			}
 		//	printf("perform:%d\n",perform);
 		}
@@ -184,4 +184,31 @@ int Input_menu(){
 		}
 	}
 	return 0;	
+}
+
+int End_choose(){
+	printf("\nPress a key to select\n");
+	printf(" -R: Restart\n");
+	printf(" -Q: Quit Game\n"); 
+
+	while(1){
+		char c = getch();
+		switch(c){
+			case 'R':{
+				return RESTART;
+			}
+			case 'r':{
+				return RESTART;
+			}
+			case 'Q':{
+				return QUIT;
+			}
+			case 'q':{
+				return QUIT;
+			}
+			default:{
+				break;
+			}
+		}
+	}
 }

@@ -15,7 +15,7 @@
 #include "Save.h"
 
 //global variable
-const int TARGET=2048;
+const int TARGET=32;
 int board[6][6] = {0};
 int maxvalue = 0;
 int goal = 0;
