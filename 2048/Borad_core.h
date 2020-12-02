@@ -23,6 +23,7 @@ int SetRandom();
 int Merge(int);
 int Merge_cldfunc(int*,int*,int*,int,int,int);
 int Move(int);
+int Move_cldfunc(int,int,int,int,int*,int);
 
 int ClearBoard();
 void ClearS();
@@ -85,7 +86,7 @@ int SetRandom(){
 	}
 }
 
-//-------- merge & move --------
+//-------- merge --------
 int Merge(int direction){
 	int if_merged = 0;		
 	for(int i=1;i<=4;i++){
@@ -144,70 +145,52 @@ int Merge_cldfunc(int *value,int *if_merged,int *locate,int row,int clo,int dire
 	}
 }
 
+//-------- move --------
 int Move(int direction){
-	int if_moved = 0;
-	for(int i=1;i<=4;i++){
-		for(int j=1;j<=4;j++){
-			switch(direction){
-				//UP or DOWN:loop by cloumns
-				case UP:{
-					int row = j;
-					int clo = i;
-					while(board[row][clo] == 0 && row<=4){
-						row++;
-					}
-					if(row !=5 && j != row){
-						board[j][i] = board[row][clo];
-						if_moved = 1;
-						board[row][clo] = 0;
-					}
-					break;
-				}
-				case DOWN:{
-					int row = 4-j+1;
-					int clo = i;
-					while(board[row][clo] == 0 && row > 0){
-						row--;
-					}
-					if(row != 0 &&(4-j+1) != row){
-						board[4-j+1][i] = board[row][clo];
-						if_moved = 1;
-						board[row][clo] = 0;
-					}
-					break;
-				}
-				
-				//LEFT or RIGHT:loop by rows
-				case LEFT:{
-					int row = i;
-					int clo = j;
-					while(board[row][clo] == 0 && clo<=4){
-						clo++;
-					}
-					if(clo != 5 && j != clo){
-						board[i][j] = board[row][clo];
-						if_moved = 1;
-						board[row][clo] = 0;
-					}
-					break;
-				}
-				case RIGHT:{
-					int row = i;
-					int clo = 4-j+1;
-					while(board[row][clo] == 0 && clo>0){
-						clo--;
-					}
-					if(clo != 0 && (4-j+1) != clo){
-						board[i][4-j+1] = board[row][clo];
-						if_moved = 1;
-						board[row][clo] = 0;
-					}
-					break;
-				}
-			}
-		}
-	}
+    int if_moved = 0;
+    for(int i=1;i<=4;i++){
+        for(int j=1;j<=4;j++){
+            switch(direction){
+                case UP:{
+                    Move_cldfunc(j,i,1,0,&if_moved,direction);
+                    break;
+                }
+                case DOWN:{
+                    Move_cldfunc(4-j+1,i,-1,0,&if_moved,direction);
+                    break;
+                }
+                case LEFT:{
+                    Move_cldfunc(i,j,0,1,&if_moved,direction);
+                    break;
+                }
+                case RIGHT:{
+                    Move_cldfunc(i,4-j+1,0,-1,&if_moved,direction);
+                    break;
+                }
+            }
+        }
+    }
 	return if_moved;
+}
+
+int Move_cldfunc(int row,int clo,int rp,int cp,int *if_moved,int direction){
+    int rowp = row;
+    int clop = clo;
+    while(board[row][clo] == 0 && row<=4 && row>0 && clo<=4 && clo>0){
+        row+=rp;
+        clo+=cp;
+    }
+    if(direction == UP || direction == DOWN){
+        if(rowp == row)     return 0;
+    }
+    else{
+        if(clop == clo)     return 0;
+    }
+    if(row == 5 || row == 0 || clo == 5 || clo == 0)    return 0;
+    board[rowp][clop] = board[row][clo];
+    *if_moved = 1;
+    board[row][clo] = 0;
+    return 0;
 }
 
 //-------- clear & print --------
