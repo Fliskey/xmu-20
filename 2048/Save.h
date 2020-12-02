@@ -10,6 +10,13 @@ extern int save_maxvalue[1004];
 extern int save_board[1004][6][6];
 extern int save_point;
 
+//function declear
+int save_push();
+int save_pop();
+int save_to_disk();
+int load_from_disk();
+
+/* 
 int check_disk(){
     FILE *data = fopen("save.data","r");
     int flag;
@@ -20,6 +27,7 @@ int check_disk(){
     fclose(data);
     return 1;
 }
+*/
 
 int save_to_disk(){
     FILE *data = fopen("save.data","w");

@@ -1,5 +1,14 @@
 //-------- 2048GAME:enter --------
-//0474-Fliskey
+
+/*--------------------------------------\
+|										|
+|	Author:	Yuxiang Wang 				|
+|	ID:		13720192200474				|
+|	Email:	Fliskey@qq.com				|
+|										|
+|	Last update time:	Dec.2 2020		|
+|										|
+\--------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,11 +20,11 @@
 //functions declear
 #include "Borad_core.h"
 #include "Judge.h"
-#include "modes.h"
 #include "Save.h"
+#include "Modes.h"
 
 //global variable
-const int TARGET=32;
+const int TARGET=2048;
 int board[6][6] = {0};
 int maxvalue = 0;
 int goal = 0;
@@ -31,6 +40,5 @@ int max_save_number = 1000;
 int main(){
 	srand((int)time(NULL)); 
 	while(mode_gaming() == RESTART);
-	
     return 0;
 }

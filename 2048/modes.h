@@ -19,6 +19,7 @@ int mode_gaming();
 int PrintScreen();
 int Print_gaming_menu();
 int Input_menu();
+int End_choose();
 
 
 //gaming mode
