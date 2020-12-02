@@ -25,7 +25,6 @@ int FailJudge(){
 		int locate[5] = {0};
 		for(int j=1;j<=4;j++){
 			if(!board[i][j]){
-			//	printf("1 %d %d\n",i,j);
 				return 0;
 			}
 			//if didn't return 0 then judge whether can merge

@@ -25,19 +25,6 @@ int save_pop();
 int save_to_disk();
 int load_from_disk();
 
-/* 
-int check_disk(){
-    FILE *data = fopen("save.data","r");
-    int flag;
-    if(fscanf(data,"%d",&flag) == EOF){
-        fclose(data);
-        return 0;
-    }
-    fclose(data);
-    return 1;
-}
-*/
-
 int save_to_disk(){
     FILE *data = fopen("save.data","w");
     fprintf(data,"%d %d\n",maxvalue,goal);

@@ -49,6 +49,8 @@ int mode_gaming(){
 		if(der == PAUSE){
 			Print_gaming_menu();
 			int pause_in = Input_menu();
+
+			//pause choose
 			switch(pause_in){
 				case RESTART:{
 					ClearS();
@@ -106,23 +108,20 @@ int mode_gaming(){
 					printf("Please connect Fliskey@qq.com to report! Thank you!\n");
 					break;
 				}
-			}
+			}//switch(pause)
 		}
 		int perform = 0;
 		perform += Merge(der);
 		perform += Move(der);
 		if(!perform){
-		//	printf("0\n");
 			continue;
 		}
 		else{
 			maxvalue = MAX(SetRandom(),maxvalue);
 			ClearS();
 			PrintScreen();
-			
 			save_push();
 
-		//	printf("max:%d\n",maxvalue);
 			if(maxvalue == TARGET){
 				Succeed();
 				return End_choose();
@@ -133,7 +132,6 @@ int mode_gaming(){
 				Failed();
 				return End_choose();
 			}
-		//	printf("perform:%d\n",perform);
 		}
 	}
 }
@@ -161,7 +159,6 @@ int Print_gaming_menu(){
 int Input_menu(){
 	while(1){
 		char c = getch();
-	//	printf("-%c-\n",c);
 		switch(c){
 			case 'R':{
 				return RESTART;

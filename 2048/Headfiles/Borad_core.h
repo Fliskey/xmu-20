@@ -51,14 +51,12 @@ int InitBoard(){
     x1 = SetRandom();
     x2 = SetRandom();
 	int maxvalue = MAX(x1,x2);
-//	printf("%d\n",maxvalue);
     return maxvalue;
 }
 
 int SetRandom(){
 	int puted = 0;
 	int tried[6][6];
-//	int remain = 16;
 	memset(tried,0,sizeof(tried));
 	
 	while(!puted){
@@ -66,27 +64,18 @@ int SetRandom(){
 		int i = t/4 +1;
 		int j = t%4 +1;
 		
-		/*
-		if(remain == 0){
-			Failed();
-			return 0;
-		}
-		*/
-		
 		if(tried[i][j]){
 			continue;
 		}
 		else if(board[i][j]){
 			if(!tried[i][j]){
 				tried[i][j] = 1;
-			//	remain--;
 			}
 			continue;
 		}
 		else if(!board[i][j]){
 			int value = 2*(rand()%2+1);
 			board[i][j] = value;
-		//	printf("%d\n",value);
 			return value;
 		}
 		else{
