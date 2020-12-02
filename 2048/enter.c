@@ -1,13 +1,13 @@
 //-------- 2048GAME:enter --------
 
 /*--------------------------------------\
-|										|
-|	Author:	Yuxiang Wang(Fliskey)		|
-|	ID:		13720192200474				|
-|	Email:	Fliskey@qq.com				|
-|										|
-|	Last update time:	Dec.2 2020		|
-|										|
+|                                       |
+|   Author: Yuxiang Wang(Fliskey)       |
+|   ID:     13720192200474              |
+|   Email:  Fliskey@qq.com              |
+|                                       |
+|   Last update time:   Dec.2 2020      |
+|                                       |
 \--------------------------------------*/
 
 #include <stdio.h>
@@ -38,7 +38,7 @@ int max_save_number = 30;
 
 //---------------- MAIN FUNCTION ----------------
 int main(){
-	srand((int)time(NULL)); 
-	while(mode_gaming() == RESTART);
+    srand((int)time(NULL)); 
+    while(mode_gaming() == RESTART);
     return 0;
 }

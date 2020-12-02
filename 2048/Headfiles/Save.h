@@ -1,13 +1,13 @@
 //-------- 2048GAME:save --------
 
 /*--------------------------------------\
-|										|
-|	Author:	Yuxiang Wang(Fliskey)		|
-|	ID:		13720192200474				|
-|	Email:	Fliskey@qq.com				|
-|										|
-|	Last update time:	Dec.2 2020		|
-|										|
+|                                       |
+|   Author: Yuxiang Wang(Fliskey)       |
+|   ID:     13720192200474              |
+|   Email:  Fliskey@qq.com              |
+|                                       |
+|   Last update time:   Dec.2 2020      |
+|                                       |
 \--------------------------------------*/
 
 extern int max_save_number;
@@ -39,9 +39,9 @@ int save_to_disk(){
 int load_from_disk(){
     FILE *data = fopen("save.data","r");
     if(data == NULL){
-    	fclose(data);
-    	return 0;
-	} 
+        fclose(data);
+        return 0;
+    } 
     fscanf(data,"%d %d",&maxvalue,&goal);
     for(int i=1;i<=4;i++){
         for(int j=1;j<=4;j++){

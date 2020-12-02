@@ -1,13 +1,13 @@
 //-------- 2048GAME:Borad_core --------
 
 /*--------------------------------------\
-|										|
-|	Author:	Yuxiang Wang(Fliskey)		|
-|	ID:		13720192200474				|
-|	Email:	Fliskey@qq.com				|
-|										|
-|	Last update time:	Dec.2 2020		|
-|										|
+|                                       |
+|   Author: Yuxiang Wang(Fliskey)       |
+|   ID:     13720192200474              |
+|   Email:  Fliskey@qq.com              |
+|                                       |
+|   Last update time:   Dec.2 2020      |
+|                                       |
 \--------------------------------------*/
 
 //define const
@@ -47,100 +47,100 @@ int GetInput();
 int InitBoard(){
     goal = 0;
     ClearBoard();
-	int x1,x2;
+    int x1,x2;
     x1 = SetRandom();
     x2 = SetRandom();
-	int maxvalue = MAX(x1,x2);
+    int maxvalue = MAX(x1,x2);
     return maxvalue;
 }
 
 int SetRandom(){
-	int puted = 0;
-	int tried[6][6];
-	memset(tried,0,sizeof(tried));
-	
-	while(!puted){
-		int t=rand()%16;
-		int i = t/4 +1;
-		int j = t%4 +1;
-		
-		if(tried[i][j]){
-			continue;
-		}
-		else if(board[i][j]){
-			if(!tried[i][j]){
-				tried[i][j] = 1;
-			}
-			continue;
-		}
-		else if(!board[i][j]){
-			int value = 2*(rand()%2+1);
-			board[i][j] = value;
-			return value;
-		}
-		else{
-			printf("ERROR!\n");
-		}
-	}
+    int puted = 0;
+    int tried[6][6];
+    memset(tried,0,sizeof(tried));
+    
+    while(!puted){
+        int t=rand()%16;
+        int i = t/4 +1;
+        int j = t%4 +1;
+        
+        if(tried[i][j]){
+            continue;
+        }
+        else if(board[i][j]){
+            if(!tried[i][j]){
+                tried[i][j] = 1;
+            }
+            continue;
+        }
+        else if(!board[i][j]){
+            int value = 2*(rand()%2+1);
+            board[i][j] = value;
+            return value;
+        }
+        else{
+            printf("ERROR!\n");
+        }
+    }
 }
 
 //-------- merge --------
 int Merge(int direction){
-	int if_merged = 0;		
-	for(int i=1;i<=4;i++){
-		int value = 0;
-		int locate = 0;
-		for(int j=1;j<=4;j++){
-			switch(direction){
-				case UP:{
-					Merge_cldfunc(&value,&if_merged,&locate,j,i,direction);
-					break;
-				}
-				case DOWN:{
-					Merge_cldfunc(&value,&if_merged,&locate,4-j+1,i,direction);
-					break;
-				}
-				case LEFT:{
-					Merge_cldfunc(&value,&if_merged,&locate,i,j,direction);
-					break;
-				}
-				case RIGHT:{
-					Merge_cldfunc(&value,&if_merged,&locate,i,4-j+1,direction);
-					break;
-				}
-			}
-		}
-	}
-	return if_merged; 
+    int if_merged = 0;        
+    for(int i=1;i<=4;i++){
+        int value = 0;
+        int locate = 0;
+        for(int j=1;j<=4;j++){
+            switch(direction){
+                case UP:{
+                    Merge_cldfunc(&value,&if_merged,&locate,j,i,direction);
+                    break;
+                }
+                case DOWN:{
+                    Merge_cldfunc(&value,&if_merged,&locate,4-j+1,i,direction);
+                    break;
+                }
+                case LEFT:{
+                    Merge_cldfunc(&value,&if_merged,&locate,i,j,direction);
+                    break;
+                }
+                case RIGHT:{
+                    Merge_cldfunc(&value,&if_merged,&locate,i,4-j+1,direction);
+                    break;
+                }
+            }
+        }
+    }
+    return if_merged; 
 }
 
 int Merge_cldfunc(int *value,int *if_merged,int *locate,int row,int clo,int direction){
-	if(board[row][clo]){
-		if(*value == board[row][clo]){
-			*if_merged = 1;
-			*value *= 2;
-			goal += *value;
-			maxvalue = MAX(maxvalue,*value);
+    if(board[row][clo]){
+        if(*value == board[row][clo]){
+            *if_merged = 1;
+            *value *= 2;
+            goal += *value;
+            maxvalue = MAX(maxvalue,*value);
             if(direction == UP || direction == DOWN){
                 board[*locate][clo] = *value;
             }
             else{
                 board[row][*locate] = *value;
             }
-			board[row][clo] = 0;
-			*value = 0;
-			*locate = 0;
-		}
-		else{
-			*value = board[row][clo];
+            board[row][clo] = 0;
+            *value = 0;
+            *locate = 0;
+        }
+        else{
+            *value = board[row][clo];
             if(direction == UP || direction == DOWN){
                 *locate = row;
             }
-			else{
+            else{
                 *locate = clo;
             }
-		}
-	}
+        }
+    }
 }
 
 //-------- move --------
@@ -168,7 +168,7 @@ int Move(int direction){
             }
         }
     }
-	return if_moved;
+    return if_moved;
 }
 
 int Move_cldfunc(int row,int clo,int rp,int cp,int *if_moved,int direction){
@@ -194,67 +194,67 @@ int Move_cldfunc(int row,int clo,int rp,int cp,int *if_moved,int direction){
 //-------- clear & print --------
 int ClearBoard(){
     memset(board,-1,sizeof(board));
-	for(int i=1;i<=4;i++){
-		for(int j=1;j<=4;j++){
-			board[i][j] = 0;
-		}
-	}
+    for(int i=1;i<=4;i++){
+        for(int j=1;j<=4;j++){
+            board[i][j] = 0;
+        }
+    }
     return 1;
 }
 
 void ClearS(){
-	system("cls");
+    system("cls");
 }
 
 int PrintBoard(){
-	printf("\n");
-	for(int i=1;i<=4;i++){
-		printf("    ");
-		for(int j=1;j<=4;j++){
-			printf("%-5d",board[i][j]);
-		} 
-		printf("\n");
-	}
-	printf("\n");
+    printf("\n");
+    for(int i=1;i<=4;i++){
+        printf("    ");
+        for(int j=1;j<=4;j++){
+            printf("%-5d",board[i][j]);
+        } 
+        printf("\n");
+    }
+    printf("\n");
 }
 
 //-------- get input --------
 int GetInput(){
-	char c = getch();
-	switch(c){
-		//-32 : the head value of direction
-		case -32:{
-			c = getch();
-			int direction = 0;
-			switch(c){
-				case 72:{
-					direction = UP;
-					break;
-				}
-				case 80:{
-					direction = DOWN;
-					break;
-				}
-				case 75:{
-					direction = LEFT; 
-					break;
-				}
-				case 77:{
-					direction = RIGHT;
-					break;
-				}
-			}
-			return direction;
-		}
-		case 'p':{
-			return PAUSE;
-		}
-		case 'P':{
-			return PAUSE;
-		}
-		default:{
-			return 0;
-			break;
-		}
-	}
+    char c = getch();
+    switch(c){
+        //-32 : the head value of direction
+        case -32:{
+            c = getch();
+            int direction = 0;
+            switch(c){
+                case 72:{
+                    direction = UP;
+                    break;
+                }
+                case 80:{
+                    direction = DOWN;
+                    break;
+                }
+                case 75:{
+                    direction = LEFT; 
+                    break;
+                }
+                case 77:{
+                    direction = RIGHT;
+                    break;
+                }
+            }
+            return direction;
+        }
+        case 'p':{
+            return PAUSE;
+        }
+        case 'P':{
+            return PAUSE;
+        }
+        default:{
+            return 0;
+            break;
+        }
+    }
 }
