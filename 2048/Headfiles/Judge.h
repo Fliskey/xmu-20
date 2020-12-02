@@ -1,5 +1,14 @@
 //-------- 2048GAME:Judge --------
-//0474-Fliskey
+
+/*--------------------------------------\
+|										|
+|	Author:	Yuxiang Wang(Fliskey)		|
+|	ID:		13720192200474				|
+|	Email:	Fliskey@qq.com				|
+|										|
+|	Last update time:	Dec.1 2020		|
+|										|
+\--------------------------------------*/
 
 //global var
 extern int board[6][6];

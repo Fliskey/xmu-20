@@ -1,5 +1,15 @@
 //-------- 2048GAME:modes --------
-//0474-Fliskey
+
+/*--------------------------------------\
+|										|
+|	Author:	Yuxiang Wang(Fliskey)		|
+|	ID:		13720192200474				|
+|	Email:	Fliskey@qq.com				|
+|										|
+|	Last update time:	Dec.2 2020		|
+|										|
+\--------------------------------------*/
+
 #define MAX(x,y) x>y?x:y
 #define RESTART 351
 #define QUIT 352
@@ -76,15 +86,24 @@ int mode_gaming(){
 					break;
 				}
 				case LOAD:{
-					load_from_disk();
+					int loadvalue = load_from_disk();
+					
+					
 					ClearS();
 					PrintScreen();
-					printf("Load Succeed!\n");
-					save_point = 0;
+					if(loadvalue == 0){
+						printf("Load Failed! No save file!\n");
+						break;
+					}
+					else{
+						printf("Load Succeed!\n");
+						save_point = 0;
+					}
 					break;
 				}
 				default:{
-					printf("ERROR!\n");
+					printf("There is an unknown ERROR!\n");
+					printf("Please connect Fliskey@qq.com to report! Thank you!\n");
 					break;
 				}
 			}
@@ -127,8 +146,9 @@ int PrintScreen(){
 }
 
 int Print_gaming_menu(){
-//	ClearS();
-	printf("-------- Pause --------\n");
+	ClearS();
+	printf("-------- Pause --------\n\n");
+	PrintBoard();
     printf("\nPress a Key to select:\n");
 	printf("- Z: Redo\n");
     printf("- R: Restart\n");
@@ -189,8 +209,8 @@ int Input_menu(){
 
 int End_choose(){
 	printf("\nPress a key to select\n");
-	printf(" -R: Restart\n");
-	printf(" -Q: Quit Game\n"); 
+	printf("- R: Restart\n");
+	printf("- Q: Quit Game\n"); 
 
 	while(1){
 		char c = getch();

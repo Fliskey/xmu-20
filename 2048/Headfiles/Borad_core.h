@@ -1,5 +1,14 @@
 //-------- 2048GAME:Borad_core --------
-//0474-Fliskey
+
+/*--------------------------------------\
+|										|
+|	Author:	Yuxiang Wang(Fliskey)		|
+|	ID:		13720192200474				|
+|	Email:	Fliskey@qq.com				|
+|										|
+|	Last update time:	Dec.2 2020		|
+|										|
+\--------------------------------------*/
 
 //define const
 //direction

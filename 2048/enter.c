@@ -2,7 +2,7 @@
 
 /*--------------------------------------\
 |										|
-|	Author:	Yuxiang Wang 				|
+|	Author:	Yuxiang Wang(Fliskey)		|
 |	ID:		13720192200474				|
 |	Email:	Fliskey@qq.com				|
 |										|
@@ -18,10 +18,10 @@
 #include <windows.h>
 
 //functions declear
-#include "Borad_core.h"
-#include "Judge.h"
-#include "Save.h"
-#include "Modes.h"
+#include "Headfiles/Borad_core.h"
+#include "Headfiles/Judge.h"
+#include "Headfiles/Save.h"
+#include "Headfiles/Modes.h"
 
 //global variable
 const int TARGET=2048;
@@ -29,11 +29,11 @@ int board[6][6] = {0};
 int maxvalue = 0;
 int goal = 0;
 
-int save_goals[1004];
-int save_board[1004][6][6];
-int save_maxvalue[1004];
+int save_goals[34];
+int save_board[34][6][6];
+int save_maxvalue[34];
 int save_point = 0;
-int max_save_number = 1000;
+int max_save_number = 30;
  
 
 //---------------- MAIN FUNCTION ----------------

@@ -1,13 +1,22 @@
 //-------- 2048GAME:save --------
-//0474-Fliskey
+
+/*--------------------------------------\
+|										|
+|	Author:	Yuxiang Wang(Fliskey)		|
+|	ID:		13720192200474				|
+|	Email:	Fliskey@qq.com				|
+|										|
+|	Last update time:	Dec.2 2020		|
+|										|
+\--------------------------------------*/
 
 extern int max_save_number;
 extern int board[6][6];
 extern int goal;
 extern int maxvalue;
-extern int save_goals[1004];
-extern int save_maxvalue[1004]; 
-extern int save_board[1004][6][6];
+extern int save_goals[34];
+extern int save_maxvalue[34]; 
+extern int save_board[34][6][6];
 extern int save_point;
 
 //function declear
@@ -42,6 +51,10 @@ int save_to_disk(){
 
 int load_from_disk(){
     FILE *data = fopen("save.data","r");
+    if(data == NULL){
+    	fclose(data);
+    	return 0;
+	} 
     fscanf(data,"%d %d",&maxvalue,&goal);
     for(int i=1;i<=4;i++){
         for(int j=1;j<=4;j++){
@@ -49,6 +62,7 @@ int load_from_disk(){
         }
     }
     fclose(data);
+    return 1;
 }
 
 int board_copy(int to[6][6],int from[6][6]){
