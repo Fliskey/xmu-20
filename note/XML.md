@@ -443,10 +443,76 @@ as
 
 5.4.3 动态索引提高处理效率
 
-期末考试
+
+
+## ==期末考试==
 
 上机考试，17周周二56节
 
 
 
 10道大题
+
+
+
+## 6.XQuery
+
+- 兼容性：XQuery和XPath2.0类型系统完全一致
+
+- XQuery：强类型语言
+  - 弱类型语言
+    - Python
+    - Javascript
+
+- 语法
+
+  - 和SQL语言非常相似
+
+  - SQL写法
+
+    ```SQL
+    SELECT column_list FROM table_sourse
+    ORDER BY order_by_expression
+    WHERE search_condition
+    ```
+
+  - XQuery写法
+
+    ```xquery
+    for $b in doc("bib-demol.xml")/bib/book
+    let &t := $b/title,$a := $b/author
+    where $a/last="Stevens"
+    order by $t
+    return <result> {$t} {$a} </result>
+    ```
+
+  - FLOWER语句
+
+    - XXPath路径表达式和内置函数
+    - 字句
+      - for、let、where、order by、 return
+    - 自定函数、命名空间
+    - for子句
+      - 范围变量
+        - 可以给取到值给后续语句使用
+        - 
+      - 位置变量
+        - at $
+      - 排序模式
+        - ordered
+        - unordered
+    - where子句
+      - 返回true
+        - where(<a/>,<b/>)
+          - 序列中第一项是节点
+        - where("true" case as xs:boolean)
+          - caseas转换成boolean
+        - where("false")
+          - 字符串长度不为零
+        - where(123)
+          - 值不为0
+      - 返回false
+        - where()
+        - where("false" cast as xs:boolean)
+        - where("")
+        - where(0)
