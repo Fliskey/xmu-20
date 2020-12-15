@@ -464,55 +464,204 @@ as
     - Python
     - Javascript
 
-- 语法
+### 语法
 
-  - 和SQL语言非常相似
+#### 和SQL语言非常相似
 
-  - SQL写法
+- SQL写法
 
-    ```SQL
-    SELECT column_list FROM table_sourse
-    ORDER BY order_by_expression
-    WHERE search_condition
+```SQL
+SELECT column_list FROM table_sourse
+ORDER BY order_by_expression
+WHERE search_condition
+```
+
+- XQuery写法
+
+```xquery
+for $b in doc("bib-demol.xml")/bib/book
+let &t := $b/title,$a := $b/author
+where $a/last="Stevens"
+order by $t
+return <result> {$t} {$a} </result>
+```
+
+### FLWOR语句
+
+XXPath路径表达式和内置函数子句
+
+for、let、where、order by、 return
+
+自定函数、命名空间
+
+#### for子句
+
+- 范围变量：可以给取到值给后续语句使用
+
+- 位置变量：at $
+
+- 排序模式
+
+	- ordered
+
+	- unordered
+
+#### where子句
+
+- 返回true
+
+  - where(<a/>,<b/>)
+
+    - 序列中第一项是节点
+
+  - where("true" case as xs:boolean)
+
+    - caseas转换成boolean
+
+  - where("false")
+
+    - 字符串长度不为零
+
+  - where(123)
+
+    - 值不为0
+
+- 返回false
+
+  - where()
+
+  - where("false" cast as xs:boolean)
+
+  - where("")
+
+  - where(0)
+
+#### order by子句
+
+- 排序
+
+  - 升序ascending
+
+  - 降序descending
+
+- 必须有for子句
+
+  - 可以let开头（语法上）但是没有排序效果
+
+  - let只能出现一个结果集
+
+- cast as 强制类型转换
+
+    - ```xquery
+      for $student in doc("students.xml")//student
+      order by $student/no cast as xs:int
+      ```
+
+#### return语句
+
+- 为候选结果集中每一项计算一次，将它们连接，形成FLWOR表达式结果
+- 返回结果的排序模式由order by决定
+
+可以输出任何文本信息
+
+- html
+- xml
+- 纯文本
+
+创建xml结构的方法
+
+##### 直接构造
+
+- 元素及其文本内容的直接构造
+
+- 属性的直接构造
+
+- 其他内容的直接构造
+
+  - ```xquery
+    let $salary := 1000
+    return 
+    <income xmlns = "http://mycompany.org">
+    	<!-- From 2006 to 2007 -->
+    	<?basis time="monthly"?>
+    	{$salary}
+    </income> 
     ```
 
-  - XQuery写法
+  - 输出
 
     ```xquery
-    for $b in doc("bib-demol.xml")/bib/book
-    let &t := $b/title,$a := $b/author
-    where $a/last="Stevens"
-    order by $t
-    return <result> {$t} {$a} </result>
+    <income xmlns="http://mycompany.org">
+    	<!-- From 2006 to 2007 -->
+    	<?basis time="monthly"?>
+    	1000
+    </income> 
     ```
 
-  - FLOWER语句
+##### 计算构造方法
 
-    - XXPath路径表达式和内置函数
-    - 字句
-      - for、let、where、order by、 return
-    - 自定函数、命名空间
-    - for子句
-      - 范围变量
-        - 可以给取到值给后续语句使用
-        - 
-      - 位置变量
-        - at $
-      - 排序模式
-        - ordered
-        - unordered
-    - where子句
-      - 返回true
-        - where(<a/>,<b/>)
-          - 序列中第一项是节点
-        - where("true" case as xs:boolean)
-          - caseas转换成boolean
-        - where("false")
-          - 字符串长度不为零
-        - where(123)
-          - 值不为0
-      - 返回false
-        - where()
-        - where("false" cast as xs:boolean)
-        - where("")
-        - where(0)
+- 元素及其文本内容的计算构造
+
+  - 使用关键字element
+
+  - 元素名
+
+    - 指定该元素的名称Qname
+    - 或表达式("{" Expr "}")
+
+  - 元素内容用"{" Expr? "}"
+
+    - ?表示一次或零次
+
+  - ```xquery
+    for $node in (<student>WangFang</student>,  <city>Beijing</city>)
+    return 
+    element {concat("new", node-name($node))}
+        {element {concat("sub", node-name($node))} {data($node)}} 
+    ```
+
+    concat : 合成函数
+
+  - 生成
+
+    ```xml
+    <newstudent>
+        <substudent>WangFang</substudent>
+    </newstudent>
+    <newcity>
+        <subcity>Beijing</subcity>
+    </newcity> 
+    ```
+
+- 属性的计算构造
+
+  - 使用关键字attribute
+
+  - 指定属性名和值的写法和元素构造一致
+
+  - ```xquery
+    for $node in (<couple><husband>Tom</husband><wife>Alice</wife></couple>)/element()
+    return 
+    element person {attribute gender 
+        {if (node-name($node) cast as xs:string="husband") 
+          then "male" else "female"}, data($node)} 
+    ```
+
+- 其他内容的计算构造
+
+  - CompTextConstructor ::= "text" 
+  
+    ```xquery
+    { for $node in (<student>WangFang</student>, <city>Beijing</city>)
+       return 
+       element {node-name($node)} 
+       {  data($node),
+           comment {"appended-text"},
+           text {2+3},
+           processing-instruction pi-name {"some-pi"}
+        }
+    }
+    ```
+  
+    
+
