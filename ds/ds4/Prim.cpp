@@ -26,7 +26,7 @@ using namespace std;
 
 //date struct
 #define NMAX 100
-int G[NMAX][NMAX];//×î´óÖ§³ÖNMAX¸ö¶¥µãµÄÁÚ½Ó¾ØÕó 
+int G[NMAX][NMAX];//ï¿½ï¿½ï¿½Ö§ï¿½ï¿½NMAXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½Ó¾ï¿½ï¿½ï¿½ 
 int visited[NMAX];
 int prim_value[NMAX];
 int father[NMAX];
@@ -70,7 +70,7 @@ void CreatG_ND_W(int *n,int *m){
 }
 
 void PrintGV(int n){
-	printf("\nGragh adjacency matrix£º\n");
+	printf("\nGragh adjacency matrix:\n");
 	for(int i=1;i<=n;i++){
 		for(int j=1;j<=n;j++){
 			printf("%-4d",G[i][j]);
