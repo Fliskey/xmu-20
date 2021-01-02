@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <windows.h>
 
 #define N 20
 
@@ -92,5 +93,6 @@ int main(){
     
     BuildTree(data,L,N);
     TreeSort(L,N);
+    system("pause");
     return 0;
 }

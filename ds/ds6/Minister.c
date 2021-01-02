@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <windows.h>
 #define N 20
 
 void Names(char A[][25],int n)
@@ -43,6 +44,6 @@ int main(){
     for(int i=0;i<N;i++){
         printf("%d:%s\n",i,Mname[i]);
     }    
-
+	system("pause"); 
     return 0;
 }

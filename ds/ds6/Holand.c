@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <windows.h>
 #define N 30    //可修改
 #define swap(x,y) (x ^= y, y ^= x, x ^= y)
 
@@ -42,5 +43,6 @@ int main(){
     }
     printf("\n");
     printf("总共执行 %d 次循环\n",countloop);
+    system("pause");
     return 0;
 }
