@@ -24,14 +24,12 @@ using namespace std;
 
 */
 
-//date struct
 #define NMAX 100
-int G[NMAX][NMAX];//���֧��NMAX��������ڽӾ��� 
+int G[NMAX][NMAX];
 int visited[NMAX];
 int prim_value[NMAX];
 int father[NMAX];
 
-//function declear
 void CreatG_ND_W(int*,int*);
 void PrintGV(int);
 void PrimInit();
@@ -46,7 +44,6 @@ int main(){
     return 0;
 }
 
-//function realize
 
 void CreatG_ND_W(int *n,int *m){
 	printf("Please enter the number of vertexs: ");

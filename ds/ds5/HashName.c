@@ -16,7 +16,7 @@ int prime(int x){
 }
 
 int find_min_prime(int x){
-    for(int i=x;i<i*2;i++){
+    for(int i=x;i<x*2;i++){
         if(prime(i) == 1){
             return i;
         }
@@ -26,7 +26,7 @@ int find_min_prime(int x){
 
 int main(){
     int m;
-    m = find_min_prime(MIN_M(30,2));
+    m = find_min_prime(MIN_M(100,3));
     printf("%d",m);
     return 0;
 }
