@@ -37,6 +37,7 @@ void Prim_V(int,int);
 void Prim(int,int);
 
 int main(){
+	freopen("Prim_in.txt","r",stdin);
     int n,m;
     CreatG_ND_W(&n,&m);
     PrintGV(n);
@@ -48,11 +49,11 @@ int main(){
 void CreatG_ND_W(int *n,int *m){
 	printf("Please enter the number of vertexs: ");
 	scanf("%d",n);
-//	printf("%d\n",*n);
+	printf("%d\n",*n);
 	
 	printf("Please enter the number of edges: "); 
 	scanf("%d",m);
-//	printf("%d\n",*m);
+	printf("%d\n",*m);
 	
 	printf("Each group includes start, end, weight ;split by block:\n");
 	
@@ -60,7 +61,7 @@ void CreatG_ND_W(int *n,int *m){
 		printf("%d. ",i);
 		int a,b,w;
 		scanf("%d %d %d",&a,&b,&w);
-	//	printf("%d %d %d\n",a,b,w);
+		printf("%d %d %d\n",a,b,w);
 		G[a][b] = w;
 		G[b][a] = w;
 	}

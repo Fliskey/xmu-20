@@ -82,6 +82,18 @@ int main(){
     return 0;
 }
 
+
+int DelLink(BiTree p,BiTree T){
+    if(p == NULL){
+        return 0;
+    }
+    Insert(&T,p->key);
+    DelLink(p->Lchild,T);
+    DelLink(p->Rchild,T);
+//    free(p);
+    return 0;
+}
+
 int DelNode(BiTree T, KeyType key){
     if(!Search(T,key)){
         printf("此数不在树中！\n");
@@ -104,11 +116,11 @@ int DelNode(BiTree T, KeyType key){
     if(p->Rchild == NULL && p->Lchild == NULL){
         if(lr == 1){
             q->Rchild = NULL;
-            free(p);
+            //free(p);
         }
         else{
             q->Lchild = NULL;
-            free(p);
+            //free(p);
         }
         return 1;
     }
@@ -141,12 +153,13 @@ int DelNode(BiTree T, KeyType key){
         p->Lchild = s->Lchild;
     }
     else{
-        
+    	q->Rchild = NULL;
+        DelLink(q->Lchild,p);
+        free(s);
     }
     return 1;
 }
 
-int link(BiTree T,)
 
 int Search(BiTree T, KeyType key){
     if(T == NULL){

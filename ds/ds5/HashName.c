@@ -26,7 +26,10 @@ int find_min_prime(int x){
 
 int main(){
     int m;
-    m = find_min_prime(MIN_M(100,3));
-    printf("%d",m);
+    int n,awl;
+    scanf("%d %d",&n,&awl);
+    m = find_min_prime(MIN_M(n,awl));
+    printf("%d\n",m);
+    system("pause");
     return 0;
 }
